@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {CustomerService} from "../../services/customer.service";
+import {Customer} from "../../model/customer.model";
 
 @Component({
   selector: 'app-customers',
@@ -8,23 +10,26 @@ import {HttpClient} from "@angular/common/http";
 })
 export class CustomersComponent implements OnInit{
 
-  customers:any;
-  accounts :any
-  constructor(private http : HttpClient) {
+  customers!: Array<Customer>;
+  errorMessage! : String
+  constructor(private customerService : CustomerService) {
   }
 
-  ngOnInit(): void {
-    this.http.get("http://localhost:8086/Customer_JaxRS/customers").subscribe(data=>{
-          this.customers = data;
-    },error => {
-      console.log(error)
+  ngOnInit(): void {this.onGetCustomers()  }
+  onGetCustomers(){
+    this.customerService.getCustomers().subscribe({
+      next: (data) => {this.customers = data;},
+      error: (err) => {this.errorMessage = err.message}
     });
-
-    this.http.get("http://localhost:8086/BankAccount_JaxRS/bankAccounts").subscribe(data=>{
-      this.accounts = data;
-    },error => {
-      console.log(error)
+  }
+  onSearchCustomer(){
+    this.customerService.searchCustomer().subscribe({
+      next: (data) => {this.customers = data;},
+      error: (err) => {this.errorMessage = err.message}
     });
 
   }
+
+
+
 }
