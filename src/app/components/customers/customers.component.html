@@ -1,0 +1,59 @@
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">Customers list</div>
+    <div *ngIf="customers" class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+              <td>Id</td>
+              <td>Name</td>
+              <td>Email</td>
+              <td>Country</td>
+              <td>City</td>
+              <td>Address</td>
+
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let customer of customers" >
+              <td>{{customer.id}}</td>
+              <td>{{customer.name}}</td>
+              <td>{{customer.email}}</td>
+              <td>{{customer.Country}}</td>
+              <td>{{customer.City}}</td>
+              <td>{{customer.Address}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+</div>
+
+
+
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">Accounts list</div>
+    <div *ngIf="accounts" class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <td>Id</td>
+          <td>RIB</td>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let customer of accounts" >
+          <td>{{customer.id}}</td>
+          <td>{{customer.rib}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+</div>
