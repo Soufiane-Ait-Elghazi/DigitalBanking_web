@@ -8,13 +8,18 @@ import {Customer} from "../model/customer.model";
 })
 export class CustomerService {
   customers : any
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient){ }
 
   public getCustomers():Observable<Array<Customer>>{
     return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers");
   }
 
-  searchCustomer() {
+  searchCustomer(keyword:String):Observable<Array<Customer>> {
+    return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers/search?keyword="+keyword);
+  }
 
+  saveCustomer(customer:Customer):Observable<Customer> {
+    console.log(customer)
+    return  this.http.post<Customer>("http://localhost:8086/Customer_JaxRS/saveCustomer",customer);
   }
 }

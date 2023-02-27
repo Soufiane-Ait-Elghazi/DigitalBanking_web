@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {CustomerService} from "../../services/customer.service";
 import {Customer} from "../../model/customer.model";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-customers',
@@ -12,10 +12,16 @@ export class CustomersComponent implements OnInit{
 
   customers!: Array<Customer>;
   errorMessage! : String
-  constructor(private customerService : CustomerService) {
+  searchFormGroup!: FormGroup;
+  constructor(private customerService : CustomerService, private fb:FormBuilder) {
   }
 
-  ngOnInit(): void {this.onGetCustomers()  }
+  ngOnInit(): void {
+    this.onGetCustomers()
+    this.searchFormGroup = this.fb.group({
+      keyword :this.fb.control("keyword")
+    })
+  }
   onGetCustomers(){
     this.customerService.getCustomers().subscribe({
       next: (data) => {this.customers = data;},
@@ -23,7 +29,7 @@ export class CustomersComponent implements OnInit{
     });
   }
   onSearchCustomer(){
-    this.customerService.searchCustomer().subscribe({
+    this.customerService.searchCustomer(this.searchFormGroup.value.keyword).subscribe({
       next: (data) => {this.customers = data;},
       error: (err) => {this.errorMessage = err.message}
     });

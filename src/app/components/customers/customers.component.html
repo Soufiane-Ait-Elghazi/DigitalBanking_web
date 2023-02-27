@@ -1,9 +1,20 @@
 <div class="container mt-2">
   <div class="card">
-    <div class="card-header">Customers list</div>
+    <div class="card-header">Customers</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <div *ngIf="customers" class="card-body">
-      <table class="table table-bordered table-hover">
+      <div *ngIf="searchFormGroup">
+        <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()">
+          <div class="input-group">
+            <label class="input-group-text">Keyword :</label>
+            <input type="text" formControlName="keyword" class="form-control">
+            <button class="btn btn-info">
+              <span class="bi bi-search"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+      <table class="table table-bordered table-hover mt-3">
         <thead>
           <tr>
               <td>Id</td>
@@ -19,9 +30,9 @@
               <td>{{customer.id}}</td>
               <td>{{customer.name}}</td>
               <td>{{customer.email}}</td>
-              <td>{{customer.Address}}</td>
-              <td>{{customer.City}}</td>
-              <td>{{customer.Country}}</td>
+              <td>{{customer.address}}</td>
+              <td>{{customer.city}}</td>
+              <td>{{customer.countryCode}}</td>
           </tr>
         </tbody>
       </table>
