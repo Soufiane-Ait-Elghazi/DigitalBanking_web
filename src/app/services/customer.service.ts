@@ -13,13 +13,23 @@ export class CustomerService {
   public getCustomers():Observable<Array<Customer>>{
     return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers");
   }
+  public getCustomer(id: string):Observable<Customer>{
+    return  this.http.get<Customer>("http://localhost:8086/Customer_JaxRS/customers/"+id);
+  }
 
   searchCustomer(keyword:String):Observable<Array<Customer>> {
     return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers/search?keyword="+keyword);
   }
 
   saveCustomer(customer:Customer):Observable<Customer> {
-    console.log(customer)
     return  this.http.post<Customer>("http://localhost:8086/Customer_JaxRS/saveCustomer",customer);
+  }
+
+  deleteCustomer(customerId: number) {
+    return  this.http.delete<Customer>("http://localhost:8086/Customer_JaxRS/deleteCustomer/"+customerId);
+  }
+
+  editCustomer(customer: Customer) {
+    return  this.http.put<Customer>("http://localhost:8086/Customer_JaxRS/updateCustomer/"+customer.id,customer);
   }
 }

@@ -1,0 +1,63 @@
+
+<div class="container mt-2">
+  <div class="card col-lg-12 mb-3">
+    <div class="card-header">Bank accounts</div>
+    <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <div *ngIf="bankAccounts" class="card-body">
+      <div *ngIf="searchFormGroup">
+        <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchAccount()" class="col-md-6">
+          <div class="input-group">
+            <label class="input-group-text">RIB :</label>
+            <input type="text" formControlName="rib" class="form-control" placeholder="XX885741666X">
+            <button class="btn btn-info">
+              <span class="bi bi-search"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+      <table class="table table-borderless  mt-3">
+        <thead class="fw-bold">
+        <tr>
+          <td>Id</td>
+          <td>RIB</td>
+          <td>Type</td>
+          <td>Balance</td>
+          <td>Currency</td>
+          <td>Status</td>
+          <td>Interest rate</td>
+          <td>Over draft</td>
+          <td>Customer</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let account of bankAccounts" >
+          <td>{{account.id}}</td>
+          <td>{{account.rib}}</td>
+          <td>{{account.accountType}}</td>
+          <td>{{account.balance}}</td>
+          <td>{{account.currency}}</td>
+          <td>{{account.accountStatus}}</td>
+          <td>{{account.interestRate}}</td>
+          <td>{{account.overDraft}}</td>
+          <td><a routerLink="/view-customer/{{account.custId}}">customer details</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <button (click)="onDeleteBankAccount(account.id)" class="btn btn-danger"><span class="bi bi-trash"></span></button>
+          </td>
+          <td>
+            <button class="btn btn-primary"><span class="bi bi-eye"></span></button>
+          </td>
+          <td>
+            <button class="btn btn-warning"><span class="bi bi-pen"></span></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer"></div>
+    </div>
+</div>
+
+

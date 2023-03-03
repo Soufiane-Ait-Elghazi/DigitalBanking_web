@@ -1,27 +1,28 @@
 <div class="container mt-2">
-  <div class="card">
+  <div class="card mb-3">
     <div class="card-header">Customers</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <div *ngIf="customers" class="card-body">
       <div *ngIf="searchFormGroup">
-        <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()">
+        <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()" class="col-md-6">
           <div class="input-group">
             <label class="input-group-text">Keyword :</label>
-            <input type="text" formControlName="keyword" class="form-control">
+            <input type="text" formControlName="keyword" class="form-control" placeholder="soufiane">
             <button class="btn btn-info">
               <span class="bi bi-search"></span>
             </button>
           </div>
         </form>
       </div>
-      <table class="table table-bordered table-hover mt-3">
-        <thead>
+      <table class="table table-borderless  mt-3">
+        <thead class="fw-bold">
           <tr>
               <td>Id</td>
               <td>Name</td>
               <td>Email</td>
               <td>Address</td>
               <td>City</td>
+              <td>Bank accounts</td>
               <td>Country</td>
           </tr>
         </thead>
@@ -32,7 +33,19 @@
               <td>{{customer.email}}</td>
               <td>{{customer.address}}</td>
               <td>{{customer.city}}</td>
+              <td><a routerLink="/customer-accounts/{{customer.id}}" >accounts</a></td>
               <td>{{customer.countryCode}}</td>
+              <td></td>
+              <td></td>
+              <td>
+                <button (click)="onDeleteCustomer(customer.id)" class="btn btn-danger"><span class="bi bi-trash"></span></button>
+              </td>
+              <td>
+                 <button  (click)="onViewCustomer(customer)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
+              </td>
+              <td>
+                <button  (click)="onEditCustomer(customer)" class="btn btn-warning"><span class="bi bi-pen"></span></button>
+              </td>
           </tr>
         </tbody>
       </table>

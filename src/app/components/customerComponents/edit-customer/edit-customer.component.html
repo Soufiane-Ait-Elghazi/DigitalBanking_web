@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="card col-md-6 offset-3 mt-3" *ngIf="editCustomerFormGroup && editCustomer">
+    <div class="card-header">Edit customer :</div>
+    <div class="text-bg-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
+    <form [formGroup]="editCustomerFormGroup" (ngSubmit)="onSaveCustomer()">
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Name : </label>
+          <input  type="text" formControlName="name" class="form-control">
+          <span class = "text-danger" *ngIf="!editCustomerFormGroup.controls['name'].valid && editCustomerFormGroup.controls['name'].errors && editCustomerFormGroup.controls['name'].errors!['required']">name is required !!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['name'].touched && editCustomerFormGroup.controls['name'].errors && editCustomerFormGroup.controls['name'].errors!['maxlength']">max length is 10 !!</span>
+          <span class = "text-danger" *ngIf="!editCustomerFormGroup.controls['name'].valid && editCustomerFormGroup.controls['name'].errors && editCustomerFormGroup.controls['name'].errors!['minlength']">min length is 4 !!</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email :</label>
+          <input type="text" formControlName="email" class="form-control">
+          <span class = "text-danger" *ngIf="!editCustomerFormGroup.controls['email'].valid && editCustomerFormGroup.controls['email'].errors && editCustomerFormGroup.controls['email'].errors!['required']">email is required !!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['email'].touched && editCustomerFormGroup.controls['email'].errors && editCustomerFormGroup.controls['email'].errors!['email']">not a valid email !!</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address :</label>
+          <input type="text" formControlName="address" class="form-control">
+          <span class = "text-danger" *ngIf="!editCustomerFormGroup.controls['address'].valid && editCustomerFormGroup.controls['address'].errors && editCustomerFormGroup.controls['address'].errors!['required']">address is required !!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['address'].touched && editCustomerFormGroup.controls['address'].errors && editCustomerFormGroup.controls['address'].errors!['minlength']">min length is 10 !!</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">City :</label>
+          <input type="text" formControlName="city" class="form-control" >
+          <span class = "text-danger" *ngIf="!editCustomerFormGroup.controls['city'].valid && editCustomerFormGroup.controls['city'].errors && editCustomerFormGroup.controls['city'].errors!['required']">city is required !!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['city'].touched && editCustomerFormGroup.controls['city'].errors && editCustomerFormGroup.controls['city'].errors!['minlength']">min length is 4!!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['city'].touched && editCustomerFormGroup.controls['city'].errors && editCustomerFormGroup.controls['city'].errors!['maxlength']">max length is 15 !!</span>
+
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Country :</label>
+          <input type="text" formControlName="countryCode" class="form-control">
+          <span class = "text-danger" *ngIf="!editCustomerFormGroup.controls['countryCode'].valid && editCustomerFormGroup.controls['countryCode'].errors && editCustomerFormGroup.controls['countryCode'].errors!['required']">country code is required !!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['countryCode'].touched &&editCustomerFormGroup.controls['countryCode'].errors && editCustomerFormGroup.controls['countryCode'].errors!['minlength']">length is 3 !!</span>
+          <span class = "text-danger" *ngIf="editCustomerFormGroup.controls['countryCode'].touched &&editCustomerFormGroup.controls['countryCode'].errors && editCustomerFormGroup.controls['countryCode'].errors!['maxlength']">length is 3 !!</span>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button [disabled]="!editCustomerFormGroup.valid" class="btn btn-success" >Save</button>
+      </div>
+    </form>
+  </div>
+</div>
