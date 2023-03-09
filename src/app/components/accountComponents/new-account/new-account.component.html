@@ -1,79 +1,56 @@
 <div class="container">
-  {{newBankAccountFormGroup.value | json }}
   <div class="card col-md-6 offset-3 mt-3 mb-3" *ngIf="newBankAccountFormGroup">
     <div class="card-header">New bank account :</div>
-    <div class="text-bg-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
-    <form [formGroup]="newBankAccountFormGroup" >
+    <div class="text-bg-danger" *ngIf="error">
+      <div class="bg-danger fw-bold" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+      <div class="text-bg-danger" *ngIf="error.errors">
+        <div *ngFor="let errorMessage of error.errors ">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="newBankAccountFormGroup">
       <div class="card-body">
         <div class="mb-3">
+          <label class="form-label fw-bold">Customer CIN : </label>
+          <input type="text" formControlName="cin" class="form-control">
+        </div>
+        <div class="mb-3">
           <label class="form-label fw-bold">Initial balance : </label>
-          <input  type="number"  min="100" formControlName="balance" class="form-control">
-          <span class = "text-danger" *ngIf="!newBankAccountFormGroup.controls['balance'].valid && newBankAccountFormGroup.controls['balance'].errors && newBankAccountFormGroup.controls['balance'].errors!['required']">balance is required !!</span>
+          <input type="number" min="100" formControlName="balance" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">Account currency : </label>
           <div>
-            <select formControlName="currency" class="form-select form-select-sm mb-3" aria-label=".form-select-lg example">
+            <select formControlName="currency" class="form-select form-select-sm mb-3"
+                    aria-label=".form-select-lg example">
               <option value="MAD">MAD</option>
               <option value="EUR">EUR</option>
               <option value="USD">USD</option>
             </select>
           </div>
-          <span class = "text-danger"
-                *ngIf="!newBankAccountFormGroup.controls['currency']
-                .valid && newBankAccountFormGroup.controls['currency']
-                .errors && newBankAccountFormGroup.controls['currency']
-                .errors!['required']">Account currency is required !!</span>
+
         </div>
 
-        <div class="mb-3">
-          <label class="form-label fw-bold">Account type : </label>
-          <p>
-            <input type="radio" value="SAVING" formControlName="accountType"> SAVING
-            <input type="radio" value="CURRENT" formControlName="accountType"> CURRENT
-          </p>
-          <span class = "text-danger"
-                *ngIf="!newBankAccountFormGroup.controls['accountType']
-                .valid && newBankAccountFormGroup.controls['accountType']
-                .errors && newBankAccountFormGroup.controls['accountType']
-                .errors!['required']">Account type is required !!</span>
-        </div>
-        <div class="mb-3">
-          <input type="hidden" value="0" formControlName="overDraft">
-          <input type="hidden" value="0" formControlName="interestRate">
-        </div>
-        <div class="mb-3" *ngIf="newBankAccountFormGroup.controls['accountType'].value =='SAVING'">
-          <label class="form-label fw-bold">Interest rate : </label>
-          <input  type="number" formControlName="interestRate" class="form-control">
-          <span class = "text-danger"
-                *ngIf="!newBankAccountFormGroup.controls['interestRate'].valid
-                && newBankAccountFormGroup.controls['interestRate'].errors
-                && newBankAccountFormGroup.controls['interestRate'].errors['required']">Interest rate is required !!</span>
-        </div>
-        <div class="mb-3" *ngIf="newBankAccountFormGroup.controls['accountType'].value == 'CURRENT'">
+        <div class="mb-3" *ngIf="bankAccountTypes">
+          <label class="form-label fw-bold">Account type:</label>
 
-          <label class="form-label fw-bold">Over draft : </label>
-          <input type="number" formControlName="overDraft" class="form-control">
-          <span class = "text-danger"
-                *ngIf="!newBankAccountFormGroup.controls['overDraft']
-                .valid && newBankAccountFormGroup.controls['overDraft']
-                .errors && newBankAccountFormGroup.controls['overDraft']
-                .errors!['required']">Over draft is required !!</span>
+          <div class="form-check" *ngFor="let at of bankAccountTypes">
+            <input class="form-check-input" type="radio" formControlName="accountType" name="accountType"
+                   id="{{at.type}}" [value]="at.id">
+            <label class="form-check-label" for="{{at.type}}">{{at.type}}</label>
+          </div>
+
         </div>
       </div>
     </form>
     <div class="card-footer ">
-        <div class="d-inline m-2">
-           <button type="button" (click)="onSaveBankAccount()" class="btn btn-success"
-                   [disabled]="!((newBankAccountFormGroup.controls['interestRate'].valid || newBankAccountFormGroup.controls['overDraft'].valid)
-                    && newBankAccountFormGroup.controls['balance'].valid
-                    && newBankAccountFormGroup.controls['accountType'].valid
-                    && newBankAccountFormGroup.controls['currency'].valid)">Save</button>
-        </div>
-        <div class="d-inline  m-2">
-          <button type="button text-white" (click)="onCancel()" class="btn btn-warning">Cancel</button>
-        </div>
+      <div class="d-inline m-2">
+        <button type="button" (click)="onSaveBankAccount()" class="btn btn-success">Save</button>
       </div>
+    </div>
   </div>
 
 </div>

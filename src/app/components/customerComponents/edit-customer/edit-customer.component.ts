@@ -18,11 +18,15 @@ export class EditCustomerComponent implements OnInit{
   constructor(private eventDriverService:EventDriverService,private route:ActivatedRoute, private router : Router, private customerService:CustomerService , private fb : FormBuilder) {
     this.editCustomerFormGroup = this.fb.group({
       id : this.fb.control(""),
-      name : this.fb.control("",[Validators.required,Validators.maxLength(10),Validators.minLength(4)]),
+      firstName : this.fb.control("",[Validators.required,Validators.maxLength(10),Validators.minLength(4)]),
+      lastName : this.fb.control("",[Validators.required,Validators.maxLength(10),Validators.minLength(4)]),
+      cin : this.fb.control(""),
+      birthDate : this.fb.control(""),
       email : this.fb.control("",[Validators.required,Validators.email]),
+      phoneNumber : this.fb.control(""),
       address : this.fb.control("",[Validators.required,Validators.minLength(4)]),
       city : this.fb.control("",[Validators.required,Validators.maxLength(15),Validators.minLength(4)]),
-      countryCode : this.fb.control("",[Validators.required,Validators.maxLength(3) ,Validators.minLength(3)])
+      countryCode : this.fb.control(""),
     })
   }
 

@@ -22,6 +22,8 @@ export class CustomerService {
   }
 
   saveCustomer(customer:Customer):Observable<Customer> {
+    if(customer.countryCode=="")
+      customer.countryCode = null
     return  this.http.post<Customer>("http://localhost:8086/Customer_JaxRS/saveCustomer",customer);
   }
 
@@ -31,5 +33,9 @@ export class CustomerService {
 
   editCustomer(customer: Customer) {
     return  this.http.put<Customer>("http://localhost:8086/Customer_JaxRS/updateCustomer/"+customer.id,customer);
+  }
+
+  searchCustomerCIN(cin: string):Observable<Customer> {
+    return  this.http.get<Customer>("http://localhost:8086/Customer_JaxRS/customers/searchcin?cin="+cin);
   }
 }

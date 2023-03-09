@@ -7,7 +7,7 @@
         <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()" class="col-md-6">
           <div class="input-group">
             <label class="input-group-text">Keyword :</label>
-            <input type="text" formControlName="keyword" class="form-control" placeholder="soufiane">
+            <input type="text" formControlName="keyword" class="form-control" placeholder="">
             <button class="btn btn-info">
               <span class="bi bi-search"></span>
             </button>
@@ -18,8 +18,10 @@
         <thead class="fw-bold">
           <tr>
               <td>Id</td>
-              <td>Name</td>
+              <td>full Name</td>
+              <td>CNI</td>
               <td>Email</td>
+              <td>Phone Number</td>
               <td>Address</td>
               <td>City</td>
               <td>Bank accounts</td>
@@ -27,10 +29,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let customer of customers" >
+          <tr *ngFor="let customer of customers  | paginate: { itemsPerPage: 6, currentPage: p }" >
               <td>{{customer.id}}</td>
-              <td>{{customer.name}}</td>
+              <td>{{customer.firstName+" "+ customer.lastName}}</td>
+              <td>{{customer.cin}}</td>
               <td>{{customer.email}}</td>
+              <td>{{customer.phoneNumber}}</td>
               <td>{{customer.address}}</td>
               <td>{{customer.city}}</td>
               <td><a routerLink="/customer-accounts/{{customer.id}}" >accounts</a></td>
@@ -50,7 +54,9 @@
         </tbody>
       </table>
     </div>
-    <div class="card-footer"></div>
+    <div class="card-footer " align="center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
 </div>
 

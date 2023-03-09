@@ -1,0 +1,23 @@
+
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">Account operation :</div>
+    <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <div *ngIf="operation" class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item fw-bolder">ID : {{operation.id}}</li>
+        <li class="list-group-item fw-bolder">Type : {{operation.type}}</li>
+        <li class="list-group-item fw-bolder">Amount : {{operation.amount}}</li>
+        <li class="list-group-item fw-bolder">Date : {{operation.operationDate}}</li>
+        <li class="list-group-item fw-bolder">Account RIB : {{operation.bankAccount.rib}}</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <a routerLink="/operations"  class="btn btn-primary  text-white">
+        <span class="bi bi-arrow-left-circle-fill"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+

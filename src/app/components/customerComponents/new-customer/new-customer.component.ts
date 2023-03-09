@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomerService} from "../../../services/customer.service";
 import {Customer} from "../../../model/customer.model";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorDto} from "../../../model/error.model";
 
 @Component({
   selector: 'app-new-customer',
@@ -12,16 +14,22 @@ import {Router} from "@angular/router";
 export class NewCustomerComponent {
   newCustomerFormGroup!: FormGroup;
   savedCustomer!: Customer;
-  errorMessage!: String;
+  errorMessages!: string[];
+  error!: ErrorDto;
+  errorMessage!: string;
 
 
   constructor(private customerService : CustomerService, private fb:FormBuilder,private router :Router) {
     this.newCustomerFormGroup = this.fb.group({
-      name : this.fb.control("",[Validators.required,Validators.maxLength(10),Validators.minLength(4)]),
-      email : this.fb.control("",[Validators.required,Validators.email]),
-      address : this.fb.control("",[Validators.required,Validators.minLength(4)]),
-      city : this.fb.control("",[Validators.required,Validators.maxLength(15),Validators.minLength(4)]),
-      countryCode : this.fb.control("",[Validators.required,Validators.maxLength(3) ,Validators.minLength(3)])
+      firstName : this.fb.control(""),
+      lastName : this.fb.control(""),
+      cin : this.fb.control(""),
+      birthDate : this.fb.control(""),
+      email : this.fb.control(""),
+      phoneNumber : this.fb.control(""),
+      address : this.fb.control(""),
+      city : this.fb.control(""),
+      countryCode : this.fb.control(""),
     })
   }
 
@@ -34,7 +42,16 @@ export class NewCustomerComponent {
          this.newCustomerFormGroup.reset();
          this.router.navigateByUrl("/customers")
         },
-       error: (err) => {this.errorMessage = err.message}
+       error: (err: HttpErrorResponse) => {
+          if(err.status == 400) {
+            this.error = err.error
+            console.log(this.error.httpCode);
+            console.log(this.error.errorCode);
+            console.log(this.error.errors); // Response body
+            this.errorMessages = this.error.errors
+            this.errorMessage = this.error.message
+          }
+       }
      });
   }
 

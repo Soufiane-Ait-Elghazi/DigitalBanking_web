@@ -17,6 +17,10 @@ import {NewAccountComponent} from "./components/accountComponents/new-account/ne
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CustomerAccountsComponent } from './components/accountComponents/customer-accounts/customer-accounts.component';
+import { OperationsComponent } from './components/operationComponents/operations/operations.component';
+import { EditAccountComponent } from './components/accountComponents/edit-account/edit-account.component';
+import { ViewAccountComponent } from './components/accountComponents/view-account/view-account.component';
+import { ViewOperationComponent } from './components/operationComponents/view-operation/view-operation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { CustomerAccountsComponent } from './components/accountComponents/custom
     NewAccountComponent,
     SidebarComponent,
     FooterComponent,
-    CustomerAccountsComponent
+    CustomerAccountsComponent,
+    OperationsComponent,
+    EditAccountComponent,
+    ViewAccountComponent,
+    ViewOperationComponent
   ],
     imports: [
         BrowserModule,

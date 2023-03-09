@@ -1,5 +1,5 @@
 
-<div class="container mt-2">
+<div class="container-fluid mt-2">
   <div class="card col-lg-12 mb-3">
     <div class="card-header">Bank accounts</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
@@ -24,21 +24,20 @@
           <td>Balance</td>
           <td>Currency</td>
           <td>Status</td>
-          <td>Interest rate</td>
-          <td>Over draft</td>
+          <td>Creation date</td>
+
           <td>Customer</td>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let account of bankAccounts" >
+        <tr *ngFor="let account of bankAccounts | paginate: { itemsPerPage: 6, currentPage: p }" >
           <td>{{account.id}}</td>
           <td>{{account.rib}}</td>
-          <td>{{account.accountType}}</td>
+          <td>{{account.bankAccountType.type}}</td>
           <td>{{account.balance}}</td>
           <td>{{account.currency}}</td>
           <td>{{account.accountStatus}}</td>
-          <td>{{account.interestRate}}</td>
-          <td>{{account.overDraft}}</td>
+          <td>{{account.creationDate}}</td>
           <td><a routerLink="/view-customer/{{account.custId}}">customer details</a></td>
           <td></td>
           <td></td>
@@ -47,16 +46,18 @@
             <button (click)="onDeleteBankAccount(account.id)" class="btn btn-danger"><span class="bi bi-trash"></span></button>
           </td>
           <td>
-            <button class="btn btn-primary"><span class="bi bi-eye"></span></button>
+            <button  (click)="onViewAccount(account.id)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
           </td>
           <td>
-            <button class="btn btn-warning"><span class="bi bi-pen"></span></button>
+            <button  (click)="onEditBankAccount(account.id)" class="btn btn-warning"><span class="bi bi-pen"></span></button>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
-    <div class="card-footer"></div>
+    <div class="card-footer" align="center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
     </div>
 </div>
 

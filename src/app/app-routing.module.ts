@@ -8,16 +8,24 @@ import {ViewCustomerComponent} from "./components/customerComponents/view-custom
 import {EditCustomerComponent} from "./components/customerComponents/edit-customer/edit-customer.component";
 import {NewAccountComponent} from "./components/accountComponents/new-account/new-account.component";
 import {CustomerAccountsComponent} from "./components/accountComponents/customer-accounts/customer-accounts.component";
+import {OperationsComponent} from "./components/operationComponents/operations/operations.component";
+import {ViewAccountComponent} from "./components/accountComponents/view-account/view-account.component";
+import {EditAccountComponent} from "./components/accountComponents/edit-account/edit-account.component";
+import {ViewOperationComponent} from "./components/operationComponents/view-operation/view-operation.component";
 
 const routes:Routes=[
   {path:"home",component: HomeComponent},
   {path:"customers",component: CustomersComponent},
   {path:"bank-accounts",component: AccountsComponent},
+  {path:"operations",component: OperationsComponent},
   {path:"new-customer",component: NewCustomerComponent},
   {path:"new-account",component: NewAccountComponent},
   {path:"customer-accounts/:id",component: CustomerAccountsComponent},
   {path:"view-customer/:id",component: ViewCustomerComponent},
+  {path:"view-account/:id",component: ViewAccountComponent},
+  {path:"view-operation/:id",component: ViewOperationComponent},
   {path:"edit-customer/:id",component: EditCustomerComponent},
+  {path:"edit-account/:id",component: EditAccountComponent},
   {path:"accounts",component: AccountsComponent},
   {path:"",redirectTo:"/home" ,pathMatch:"full"}
 ]

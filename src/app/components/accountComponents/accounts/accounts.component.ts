@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {EventDriverService} from "../../../services/event.driver.service";
 import {BankAccount} from "../../../model/bankAccount.model";
 import {BankAccountService} from "../../../services/bank-account.service";
+import {CustomerActionsTypes} from "../../../state/customer.state";
 
 
 
@@ -18,6 +19,7 @@ export class AccountsComponent {
   errorMessage! : String
   searchFormGroup!: FormGroup;
   deletedBankAccount!: BankAccount;
+  p: number = 1;
 
 
   constructor(private bankAccountService : BankAccountService, private fb:FormBuilder, private router:Router, private eventDriverService : EventDriverService) {
@@ -25,6 +27,7 @@ export class AccountsComponent {
   }
 
   ngOnInit(): void {
+
     this.onGetBankAccounts()
     this.searchFormGroup = this.fb.group({
       rib :this.fb.control("")
@@ -53,9 +56,19 @@ export class AccountsComponent {
     this.bankAccountService.deleteAccount(id).subscribe({
       next: (data) => {
         this.deletedBankAccount = data;
+        this.onGetBankAccounts()
       },
       error: (err) => {this.errorMessage = err.message}
     });
+  }
+
+  onEditBankAccount(id: number) {
+    this.router.navigateByUrl("edit-account/"+id)
+  }
+
+  onViewAccount(id: number) {
+
+    this.router.navigateByUrl("view-account/"+id)
   }
 }
 

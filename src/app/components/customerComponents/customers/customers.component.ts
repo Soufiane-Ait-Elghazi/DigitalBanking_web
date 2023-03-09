@@ -17,6 +17,7 @@ export class CustomersComponent implements OnInit{
   errorMessage! : String
   searchFormGroup!: FormGroup;
   private deletedCustomer!: Customer;
+  p: number= 1;
   constructor(private customerService : CustomerService,
               private fb:FormBuilder,
               private router:Router,
@@ -31,7 +32,10 @@ export class CustomersComponent implements OnInit{
   }
   onGetCustomers(){
     this.customerService.getCustomers().subscribe({
-      next: (data) => {this.customers = data;},
+      next: (data) => {
+        this.customers = data;
+
+        },
       error: (err) => {this.errorMessage = err.message}
     });
   }

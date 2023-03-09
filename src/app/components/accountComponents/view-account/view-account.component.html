@@ -1,0 +1,24 @@
+
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">Customer :</div>
+    <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <div *ngIf="account" class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item fw-bolder">ID : {{account.id}}</li>
+        <li class="list-group-item fw-bolder">Type : {{account.bankAccountType.type}}</li>
+        <li class="list-group-item fw-bolder">RIB : {{account.rib}}</li>
+        <li class="list-group-item fw-bolder">Balance : {{account.balance}}</li>
+        <li class="list-group-item fw-bolder">Creation date : {{account.creationDate}}</li>
+        <li class="list-group-item fw-bolder">Status : {{account.accountStatus}}</li>
+        <li class="list-group-item fw-bolder">Currency : {{account.currency}}</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <a routerLink="/bank-accounts"  class="btn btn-primary  text-white">
+        <span class="bi bi-arrow-left-circle-fill"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
