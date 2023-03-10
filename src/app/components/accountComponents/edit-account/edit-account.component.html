@@ -1,54 +1,60 @@
 <div class="container">
-  {{editBankAccountFormGroup.value | json }}
-  <div class="card col-md-6 offset-3 mt-3 mb-3" *ngIf="editBankAccountFormGroup">
-    <div class="card-header">New bank account :</div>
-    <div class="text-bg-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
-    <form [formGroup]="editBankAccountFormGroup" >
-      <div class="card-body">
-        <div class="mb-3">
-          <label class="form-label fw-bold">Initial balance : </label>
-          <input  type="number"  min="100" formControlName="balance" class="form-control">
-          <span class = "text-danger" *ngIf="!editBankAccountFormGroup.controls['balance'].valid && editBankAccountFormGroup.controls['balance'].errors && editBankAccountFormGroup.controls['balance'].errors!['required']">balance is required !!</span>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Account currency : </label>
-          <div>
-            <select formControlName="currency" class="form-select form-select-sm mb-3" aria-label=".form-select-lg example">
-              <option value="MAD">MAD</option>
-              <option value="EUR">EUR</option>
-              <option value="USD">USD</option>
-            </select>
-          </div>
-          <span class = "text-danger"
-                *ngIf="!editBankAccountFormGroup.controls['currency']
-                .valid && editBankAccountFormGroup.controls['currency']
-                .errors && editBankAccountFormGroup.controls['currency']
-                .errors!['required']">Account currency is required !!</span>
-        </div>
-
-        <div class="mb-3" *ngIf="bankAccountTypes">
-          <label class="form-label fw-bold">Account type:</label>
-
-          <div class="form-check" *ngFor="let at of bankAccountTypes">
-            <input class="form-check-input" type="radio" formControlName="accountType" name="accountType" id="{{at.type}}" [value]="at.id" >
-            <label class="form-check-label" for="{{at.type}}">{{at.type}}</label>
-          </div>
-
-          <span class = "text-danger"
-                *ngIf="!editBankAccountFormGroup.controls['accountType']
-                .valid && editBankAccountFormGroup.controls['accountType']
-                .errors && editBankAccountFormGroup.controls['accountType']
-                .errors!['required']">Account type is required !!</span>
+  <div class="card col-md-6 offset-3 mt-3 mb-3 border-white .mx-auto shadow p-3 mb-5 bg-body rounded" *ngIf="editBankAccountFormGroup">
+    <div class="card-header bg-primary text-white border-white fw-bold">Edit bank account :</div>
+    <div class="text-bg-danger" *ngIf="error">
+      <div class="bg-danger fw-bold" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+      <div class="text-bg-danger" *ngIf="error.errors">
+        <div *ngFor="let errorMessage of error.errors ">
+          {{errorMessage}}
         </div>
       </div>
+    </div>
+    <form [formGroup]="editBankAccountFormGroup">
+      <div class="card-body">
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Balance : </label>
+          <input type="number" min="100" formControlName="balance" class="form-control">
+        </div>
+        <div class="mb-3">
+          <div>
+            <label class="form-label fw-bold">Status : </label>
+          </div>
+          <div class="btn-group btn-group-sm ">
+            <button type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">Created</button>
+            <button type="button" class="btn btn-warning m-1" (click)="updateStatus('ACTIVATED')">Activated</button>
+            <button type="button" class="btn btn-primary m-1" (click)="updateStatus('SUSPENDED')">Suspended</button>
+            <button type="button" class="btn btn-danger m-1" (click)="updateStatus('BLOCKED')">Blocked</button>
+          </div>
+        </div>
+
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Account Currency : </label>
+          <select formControlName="currency" class="form-select form-select-sm mb-3 " aria-label=".form-select-lg example">
+            <option value="MAD">MAD</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+          </select>
+      </div>
+
+      <div class="mb-3" *ngIf="bankAccountTypes">
+        <label class="form-label fw-bold">Account type:</label>
+        <div class="form-check" *ngFor="let at of bankAccountTypes">
+          <input class="form-check-input" type="radio" formControlName="accountType" name="accountType"
+                 id="{{at.type}}" [value]="at.id">
+          <label class="form-check-label" for="{{at.type}}">{{at.type}}</label>
+        </div>
+      </div>
+      </div>
     </form>
-    <div class="card-footer ">
+    <div class="card-footer border-white text-white bg-white">
       <div class="d-inline m-2">
-        <button type="button" (click)="onSaveBankAccount()" class="btn btn-success">Save</button>
+        <button type="button" (click)="onSaveBankAccount()" class="btn btn-primary text-white">Save</button>
       </div>
     </div>
   </div>
-
 </div>
-
 

@@ -1,0 +1,92 @@
+<div class="container-fluid">
+  <div class="card mb-3 align-content-center">
+    <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+          <div  class="card-body">
+            <div >
+              <form class="col-md-6 ">
+                <div class="input-group">
+                  <label class="input-group-text">Keyword :</label>
+                  <input type="text" formControlName="keyword" class="form-control" placeholder="soufiane">
+                  <button class="btn btn-info">
+                    <span class="bi bi-search"></span>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+     </div>
+
+  <div class="row mt-3">
+    <div class="col col-md-8">
+      <div class="card col-lg-12 mb-3">
+        <div class="card-header">Operations :</div>
+        <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div *ngIf="accountOperations" class="card-body">
+          <table class="table table-borderless ">
+            <thead class="fw-bold">
+            <tr>
+              <td>Id</td>
+              <td>Date</td>
+              <td>Amount</td>
+              <td>Type</td>
+            </tr>
+            </thead>
+            <tbody *ngIf="end">
+            <tr *ngFor="let operation of accountOperations  | paginate: { itemsPerPage: 6, currentPage: end }" >
+              <td>{{operation.id}}</td>
+              <td>{{operation.operationDate}}</td>
+              <td>{{operation.amount}}</td>
+              <td>{{operation.type}}</td>
+              <td>
+                <button (click)="onViewOpertion(operation.id)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer" align="center">
+          <pagination-controls (pageChange)="end = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-4">
+      <div class="card">
+        <div class="card-header">
+          New Bank operations:
+        </div>
+          <div class="text-bg-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
+          <form [formGroup]="newOperationFormGroup" (ngSubmit)="onSaveOperation()">
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">Operation type : </label>
+                <p>
+                  <input type="radio" value="DEBIT" formControlName="operationType"> DEBIT
+                  <input type="radio" value="CREDIT" formControlName="operationType"> CREDIT
+                  <input type="radio" value="TRANSFER" formControlName="operationType"> TRANSFER
+                </p>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Account Source RIB :</label>
+                <input  type="text" formControlName="accountSourceRIB" class="form-control">
+              </div>
+              <div class="mb-3" *ngIf="newOperationFormGroup.controls['operationType'].value ==='TRANSFER'">
+                <label class="form-label">Account Destination RIB :</label>
+                <input  type="text" formControlName="accountDestinationRIB" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Amount :</label>
+                <input type="text" formControlName="amount" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Descripetion :</label>
+                <input type="text" formControlName="description" class="form-control">
+              </div>
+          </div>
+            <div class="card-footer">
+              <button class="btn btn-success">Save</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

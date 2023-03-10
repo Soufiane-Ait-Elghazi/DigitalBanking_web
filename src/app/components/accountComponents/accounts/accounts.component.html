@@ -1,13 +1,13 @@
 
 <div class="container-fluid mt-2">
-  <div class="card col-lg-12 mb-3">
-    <div class="card-header">Bank accounts</div>
+  <div class="card col-lg-12 mb-3 border-white shadow p-3 bg-body rounded">
+    <div class="card-header bg-primary text-white fw-bold border-white">Bank accounts</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
-    <div *ngIf="bankAccounts" class="card-body">
+    <div *ngIf="bankAccounts" class="card-body border-white">
       <div *ngIf="searchFormGroup">
         <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchAccount()" class="col-md-6">
           <div class="input-group">
-            <label class="input-group-text">RIB :</label>
+            <label class="input-group-text bg-primary text-white">RIB :</label>
             <input type="text" formControlName="rib" class="form-control" placeholder="XX885741666X">
             <button class="btn btn-info">
               <span class="bi bi-search"></span>
@@ -15,7 +15,7 @@
           </div>
         </form>
       </div>
-      <table class="table table-borderless  mt-3">
+      <table class="table table-responsive  mt-3">
         <thead class="fw-bold">
         <tr>
           <td>Id</td>
@@ -55,7 +55,7 @@
         </tbody>
       </table>
     </div>
-    <div class="card-footer" align="center">
+    <div class="card-footer border-white bg-white" align="center">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
     </div>

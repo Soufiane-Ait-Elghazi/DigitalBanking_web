@@ -6,7 +6,6 @@ import {BankAccount} from "../../../model/bankAccount.model";
 import {BankAccountType} from "../../../model/BankAccountType";
 import {Customer} from "../../../model/customer.model";
 import {CustomerService} from "../../../services/customer.service";
-import {Observable} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ErrorDto} from "../../../model/error.model";
 

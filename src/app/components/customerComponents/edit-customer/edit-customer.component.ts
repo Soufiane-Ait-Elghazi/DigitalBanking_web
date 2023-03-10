@@ -4,6 +4,8 @@ import {Customer} from "../../../model/customer.model";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EventDriverService} from "../../../services/event.driver.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorDto} from "../../../model/error.model";
 
 @Component({
   selector: 'app-edit-customer',
@@ -15,17 +17,19 @@ export class EditCustomerComponent implements OnInit{
   editCustomerFormGroup!: FormGroup;
   editCustomer!: Customer;
   errorMessage!: String;
+  errorMessages!: String[];
+ error!: ErrorDto;
   constructor(private eventDriverService:EventDriverService,private route:ActivatedRoute, private router : Router, private customerService:CustomerService , private fb : FormBuilder) {
     this.editCustomerFormGroup = this.fb.group({
       id : this.fb.control(""),
-      firstName : this.fb.control("",[Validators.required,Validators.maxLength(10),Validators.minLength(4)]),
-      lastName : this.fb.control("",[Validators.required,Validators.maxLength(10),Validators.minLength(4)]),
+      firstName : this.fb.control(""),
+      lastName : this.fb.control(""),
       cin : this.fb.control(""),
       birthDate : this.fb.control(""),
-      email : this.fb.control("",[Validators.required,Validators.email]),
+      email : this.fb.control(""),
       phoneNumber : this.fb.control(""),
-      address : this.fb.control("",[Validators.required,Validators.minLength(4)]),
-      city : this.fb.control("",[Validators.required,Validators.maxLength(15),Validators.minLength(4)]),
+      address : this.fb.control(""),
+      city : this.fb.control(""),
       countryCode : this.fb.control(""),
     })
   }
@@ -50,7 +54,16 @@ export class EditCustomerComponent implements OnInit{
         this.router.navigateByUrl("/customers")
         this.editCustomerFormGroup.reset();
       },
-      error: (err) => {this.errorMessage = err.message}
+      error: (err: HttpErrorResponse) => {
+        if(err.status == 400) {
+          this.error = err.error
+          console.log(this.error.httpCode);
+          console.log(this.error.errorCode);
+          console.log(this.error.errors);
+          this.errorMessage = this.error.message
+          this.errorMessages == this.error.errors
+        }
+      }
     });
   }
 
