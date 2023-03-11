@@ -34,7 +34,7 @@ export class CustomersComponent implements OnInit{
     this.customerService.getCustomers().subscribe({
       next: (data) => {
         this.customers = data;
-
+          this.p = 1
         },
       error: (err) => {this.errorMessage = err.message}
     });

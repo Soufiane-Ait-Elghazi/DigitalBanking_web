@@ -46,6 +46,7 @@ export class AccountsComponent {
     this.bankAccountService.searchAccounts(this.searchFormGroup.value.rib).subscribe({
       next: (data) => {
         this.bankAccounts = data;
+        this.p=1
       },
       error: (err) => {this.errorMessage = err.message}
     });

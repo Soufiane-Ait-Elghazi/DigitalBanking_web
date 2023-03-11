@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="card col-md-6 offset-3 mt-3 mb-3" *ngIf="newBankAccountFormGroup">
-    <div class="card-header">New bank account :</div>
+  <div class="card col-md-6 offset-3 mt-3 mb-3  border-white .mx-auto shadow p-3 mb-5 bg-body rounded" *ngIf="newBankAccountFormGroup">
+    <div class="card-header bg-primary text-white border-white">New bank account :</div>
     <div class="text-bg-danger" *ngIf="error">
       <div class="bg-danger fw-bold" *ngIf="errorMessage">
         {{errorMessage}}
@@ -12,7 +12,7 @@
       </div>
     </div>
     <form [formGroup]="newBankAccountFormGroup">
-      <div class="card-body">
+      <div class="card-body border-white">
         <div class="mb-3">
           <label class="form-label fw-bold">Customer CIN : </label>
           <input type="text" formControlName="cin" class="form-control">
@@ -46,9 +46,9 @@
         </div>
       </div>
     </form>
-    <div class="card-footer ">
+    <div class="card-footer bg-white border-white ">
       <div class="d-inline m-2">
-        <button type="button" (click)="onSaveBankAccount()" class="btn btn-success">Save</button>
+        <button type="button" (click)="onSaveBankAccount()" class="btn btn-outline-primary">Save</button>
       </div>
     </div>
   </div>

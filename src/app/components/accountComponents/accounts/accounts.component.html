@@ -15,7 +15,11 @@
           </div>
         </form>
       </div>
-      <table class="table table-responsive  mt-3">
+      <div *ngIf="!bankAccounts.length" class="bg-white text-danger text-center">
+        no bank account
+      </div>
+
+      <table class="table table-responsive  mt-3" *ngIf="bankAccounts.length > 0">
         <thead class="fw-bold">
         <tr>
           <td>Id</td>
@@ -25,7 +29,6 @@
           <td>Currency</td>
           <td>Status</td>
           <td>Creation date</td>
-
           <td>Customer</td>
         </tr>
         </thead>
@@ -38,18 +41,16 @@
           <td>{{account.currency}}</td>
           <td>{{account.accountStatus}}</td>
           <td>{{account.creationDate}}</td>
-          <td><a routerLink="/view-customer/{{account.custId}}">customer details</a></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td *ngIf="bankAccounts"><a routerLink="/view-customer/{{account.custId}}">customer</a></td>
+
           <td>
-            <button (click)="onDeleteBankAccount(account.id)" class="btn btn-danger"><span class="bi bi-trash"></span></button>
+            <button  *ngIf="bankAccounts"(click)="onDeleteBankAccount(account.id)" class="btn btn-outline-danger border-white"><span class="bi bi-trash"></span></button>
           </td>
           <td>
-            <button  (click)="onViewAccount(account.id)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
+            <button *ngIf="bankAccounts" (click)="onViewAccount(account.id)" class="btn btn-outline-primary border-white"><span class="bi bi-eye"></span></button>
           </td>
           <td>
-            <button  (click)="onEditBankAccount(account.id)" class="btn btn-warning"><span class="bi bi-pen"></span></button>
+            <button *ngIf="bankAccounts" (click)="onEditBankAccount(account.id)" class="btn btn-outline-warning border-white"><span class="bi bi-pen"></span></button>
           </td>
         </tr>
         </tbody>

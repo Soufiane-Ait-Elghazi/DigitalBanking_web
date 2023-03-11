@@ -1,60 +1,60 @@
-<div class="container mt-2">
-  <div class="card mb-3">
-    <div class="card-header">Customers</div>
+<div class="container mt-2 ">
+  <div class="card mb-3 border-white shadow p-3 bg-body rounded">
+    <div class=" h3 card-header bg-white fw-bolder border-white text-info">BANK CUSTOMERS</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
-    <div *ngIf="customers" class="card-body">
-      <div *ngIf="searchFormGroup">
-        <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()" class="col-md-6">
-          <div class="input-group">
-            <label class="input-group-text">Keyword :</label>
-            <input type="text" formControlName="keyword" class="form-control" placeholder="">
-            <button class="btn btn-info">
-              <span class="bi bi-search"></span>
-            </button>
+    <div *ngIf="customers" class="card-body ">
+      <div class="row mt-5">
+        <div class="col-11">
+          <div *ngIf="searchFormGroup">
+            <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()" class="col-md-6">
+              <div class="input-group col align-self-end">
+                <label class="input-group-text text-white bg-info">Keyword</label>
+                <input type="text" formControlName="keyword" class="form-control" placeholder="PA25XXXX">
+                <button class="btn btn-outline-info ">
+                  <span class="bi bi-search"></span>
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        <div class="col-1">
+          <button (click)="onGetCustomers()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+        </div>
       </div>
-      <table class="table table-borderless  mt-3">
-        <thead class="fw-bold">
+      <table class="table table-sm mt-2">
+        <thead class="fw-bold text-info">
           <tr>
-              <td>Id</td>
-              <td>full Name</td>
-              <td>CNI</td>
+              <td>Full name</td>
+              <td>CIN</td>
               <td>Email</td>
-              <td>Phone Number</td>
+              <td>Phone number</td>
               <td>Address</td>
-              <td>City</td>
               <td>Bank accounts</td>
-              <td>Country</td>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let customer of customers  | paginate: { itemsPerPage: 6, currentPage: p }" >
-              <td>{{customer.id}}</td>
+          <tr *ngFor="let customer of customers  | paginate: { itemsPerPage: 7, currentPage: p }" >
+
               <td>{{customer.firstName+" "+ customer.lastName}}</td>
               <td>{{customer.cin}}</td>
               <td>{{customer.email}}</td>
               <td>{{customer.phoneNumber}}</td>
               <td>{{customer.address}}</td>
-              <td>{{customer.city}}</td>
               <td><a routerLink="/customer-accounts/{{customer.id}}" >accounts</a></td>
-              <td>{{customer.countryCode}}</td>
-              <td></td>
-              <td></td>
               <td>
-                <button (click)="onDeleteCustomer(customer.id)" class="btn btn-danger"><span class="bi bi-trash"></span></button>
+                <button (click)="onDeleteCustomer(customer.id)" class="btn btn-outline-danger border-white"><span class="bi bi-trash-fill"></span></button>
               </td>
               <td>
-                 <button  (click)="onViewCustomer(customer)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
+                 <button  (click)="onViewCustomer(customer)" class="btn btn-outline-primary border-white"><span class="bi bi-eye-fill"></span></button>
               </td>
               <td>
-                <button  (click)="onEditCustomer(customer)" class="btn btn-warning"><span class="bi bi-pen"></span></button>
+                <button  (click)="onEditCustomer(customer)" class="btn btn-outline-warning border-white"><span class="bi bi-pencil-fill"></span></button>
               </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="card-footer " align="center">
+    <div class="card-footer border-white text-primary bg-white " align="center">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
