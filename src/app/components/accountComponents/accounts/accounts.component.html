@@ -22,25 +22,21 @@
       <table class="table table-responsive  mt-3" *ngIf="bankAccounts.length > 0">
         <thead class="fw-bold">
         <tr>
-          <td>Id</td>
           <td>RIB</td>
           <td>Type</td>
           <td>Balance</td>
           <td>Currency</td>
           <td>Status</td>
-          <td>Creation date</td>
           <td>Customer</td>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let account of bankAccounts | paginate: { itemsPerPage: 6, currentPage: p }" >
-          <td>{{account.id}}</td>
           <td>{{account.rib}}</td>
           <td>{{account.bankAccountType.type}}</td>
           <td>{{account.balance}}</td>
           <td>{{account.currency}}</td>
           <td>{{account.accountStatus}}</td>
-          <td>{{account.creationDate}}</td>
           <td *ngIf="bankAccounts"><a routerLink="/view-customer/{{account.custId}}">customer</a></td>
 
           <td>

@@ -1,12 +1,17 @@
-<div class="container">
-  <div class="card col-md-6 offset-3 mt-3 mb-3" *ngIf="newCustomerFormGroup">
-    <div class="card-header">New customer :</div>
+<div class="container-fluid col-md-8 mt-3 border-white shadow p-3 bg-body rounded">
+  <div class="card bg-white border-white mb-3" *ngIf="newCustomerFormGroup">
+    <div class="row">
+      <div class="h3 col-11 card-header bg-white fw-bolder border-white text-info">NEW CUSTOMER</div>
+      <div class="col-1">
+        <button (click)="reload()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+      </div>
+    </div>
     <div class="text-bg-danger" *ngIf="error">
-      <div class="bg-danger fw-bold" *ngIf="errorMessage">
+      <div class="bg-white text-danger fw-bold" *ngIf="errorMessage">
         {{errorMessage}}
       </div>
         <div  *ngIf="error.errors">
-          <div class="text-bg-danger" *ngFor="let errorMessage of error.errors ">
+          <div class="bg-white text-danger" *ngFor="let errorMessage of error.errors ">
             {{errorMessage}}
           </div>
         </div>
@@ -15,80 +20,55 @@
       <div class="card-body">
         <div class="row col-lg-12">
           <div class="mb-3 col-lg-6">
-            <label class="form-label">First name : </label>
+            <label class="form-label fw-bold text-info">First name : </label>
             <input type="text" formControlName="firstName" class="form-control">
-            <!--   <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['firstName'].valid && newCustomerFormGroup.controls['firstName'].errors && newCustomerFormGroup.controls['firstName'].errors!['required']">name is required !!</span>
-               <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['firstName'].touched && newCustomerFormGroup.controls['firstName'].errors && newCustomerFormGroup.controls['firstName'].errors!['maxlength']">max length is 10 !!</span>
-               <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['firstName'].valid && newCustomerFormGroup.controls['firstName'].errors && newCustomerFormGroup.controls['firstName'].errors!['minlength']">min length is 4 !!</span>
-             -->
           </div>
           <div class="mb-3 col-lg-6">
-            <label class="form-label">Last name : </label>
+            <label class="form-label fw-bold text-info">Last name : </label>
             <input type="text" formControlName="lastName" class="form-control">
-            <!--  <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['lastName'].valid && newCustomerFormGroup.controls['lastName'].errors && newCustomerFormGroup.controls['lastName'].errors!['required']">name is required !!</span>
-              <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['lastName'].touched && newCustomerFormGroup.controls['lastName'].errors && newCustomerFormGroup.controls['lastName'].errors!['maxlength']">max length is 10 !!</span>
-              <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['lastName'].valid && newCustomerFormGroup.controls['lastName'].errors && newCustomerFormGroup.controls['lastName'].errors!['minlength']">min length is 4 !!</span>
-            </div>
-            -->
           </div>
 
           <div class="row col-lg-12">
             <div class="mb-3 col-lg-6">
-              <label class="form-label">CIN: </label>
+              <label class="form-label fw-bold text-info">CIN: </label>
               <input type="text" formControlName="cin" class="form-control">
             </div>
             <div class="mb-3 col-lg-6">
-              <label class="form-label">Birth date : </label>
+              <label class="form-label fw-bold text-info">Birth date : </label>
               <input type="date" formControlName="birthDate" class="form-control">
             </div>
           </div>
           <div class="row col-lg-12">
             <div class="mb-3 col-lg-6">
-              <label class="form-label">Email :</label>
+              <label class="form-label fw-bold text-info">Email :</label>
               <input type="text" formControlName="email" class="form-control">
-              <!--     <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['email'].valid && newCustomerFormGroup.controls['email'].errors && newCustomerFormGroup.controls['email'].errors!['required']">email is required !!</span>
-                   <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['email'].touched && newCustomerFormGroup.controls['email'].errors && newCustomerFormGroup.controls['email'].errors!['email']">not a valid email !!</span>
-                 -->
             </div>
             <div class="mb-3 col-lg-6">
-              <label class="form-label">Phone number :</label>
+              <label class="form-label fw-bold text-info">Phone number :</label>
               <input type="text" formControlName="phoneNumber" class="form-control">
             </div>
           </div>
           <div class="mb-3">
-            <label class="form-label">Address :</label>
+            <label class="form-label fw-bold text-info">Address :</label>
             <input type="text" formControlName="address" class="form-control">
-            <!--
-             <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['address'].valid && newCustomerFormGroup.controls['address'].errors && newCustomerFormGroup.controls['address'].errors!['required']">address is required !!</span>
-             <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['address'].touched && newCustomerFormGroup.controls['address'].errors && newCustomerFormGroup.controls['address'].errors!['minlength']">min length is 10 !!</span>
-           -->
           </div>
           <div class="row col-lg-12">
             <div class="mb-3 col-lg-6">
-              <label class="form-label">City :</label>
+              <label class="form-label fw-bold text-info">City :</label>
               <input type="text" formControlName="city" class="form-control">
-              <!--  <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['city'].valid && newCustomerFormGroup.controls['city'].errors && newCustomerFormGroup.controls['city'].errors!['required']">city is required !!</span>
-                <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['city'].touched && newCustomerFormGroup.controls['city'].errors && newCustomerFormGroup.controls['city'].errors!['minlength']">min length is 4!!</span>
-                <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['city'].touched && newCustomerFormGroup.controls['city'].errors && newCustomerFormGroup.controls['city'].errors!['maxlength']">max length is 15 !!</span>
-                -->
             </div>
             <div class="mb-3 col-lg-6">
-              <label class="form-label">Country :</label>
+              <label class="form-label fw-bold text-info">Country :</label>
               <select formControlName="countryCode" class="form-select form-select-sm mb-3" aria-label=".form-select-lg example">
                 <option value="MAR">MAR</option>
                 <option value="FRA">FRA</option>
                 <option value="USA">USA</option>
               </select>
-              <!--
-              <span class = "text-danger" *ngIf="!newCustomerFormGroup.controls['countryCode'].valid && newCustomerFormGroup.controls['countryCode'].errors && newCustomerFormGroup.controls['countryCode'].errors!['required']">country code is required !!</span>
-              <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['countryCode'].touched &&newCustomerFormGroup.controls['countryCode'].errors && newCustomerFormGroup.controls['countryCode'].errors!['minlength']">length is 3 !!</span>
-              <span class = "text-danger" *ngIf="newCustomerFormGroup.controls['countryCode'].touched &&newCustomerFormGroup.controls['countryCode'].errors && newCustomerFormGroup.controls['countryCode'].errors!['maxlength']">length is 3 !!</span>
-           -->
             </div>
           </div>
         </div>
-        <div class="card-footer">
-          <button class="btn btn-success">Save</button>
+        <div class="card-footer bg-white border-white">
+          <button type="button" class="btn btn-outline-primary" (click)="onSaveCustomer()">Save</button>
         </div>
       </div>
     </form>

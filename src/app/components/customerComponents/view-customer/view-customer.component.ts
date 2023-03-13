@@ -33,4 +33,7 @@ export class ViewCustomerComponent implements OnInit{
     });
   }
 
+  reload() {
+    this.ngOnInit();
+  }
 }

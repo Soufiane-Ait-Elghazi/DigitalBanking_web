@@ -21,6 +21,7 @@ import { OperationsComponent } from './components/operationComponents/operations
 import { EditAccountComponent } from './components/accountComponents/edit-account/edit-account.component';
 import { ViewAccountComponent } from './components/accountComponents/view-account/view-account.component';
 import { ViewOperationComponent } from './components/operationComponents/view-operation/view-operation.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ViewOperationComponent } from './components/operationComponents/view-op
     OperationsComponent,
     EditAccountComponent,
     ViewAccountComponent,
-    ViewOperationComponent
+    ViewOperationComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,

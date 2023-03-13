@@ -1,12 +1,12 @@
 <div class="container-fluid">
-  <div class="card mb-3 align-content-center">
-    <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+  <div class="card mb-3 align-content-center border-white bg-white">
+    <div class="text-bg-danger" *ngIf="errorMessage1">{{errorMessage1}}</div>
           <div  class="card-body">
             <div >
               <form class="col-md-6 ">
                 <div class="input-group">
                   <label class="input-group-text">Keyword :</label>
-                  <input type="text" formControlName="keyword" class="form-control" placeholder="soufiane">
+                  <input type="text"  placeholder="soufiane">
                   <button class="btn btn-info">
                     <span class="bi bi-search"></span>
                   </button>
@@ -15,12 +15,13 @@
             </div>
         </div>
      </div>
-
-  <div class="row mt-3">
-    <div class="col col-md-8">
-      <div class="card col-lg-12 mb-3">
-        <div class="card-header">Operations :</div>
-        <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+  <div class="row m-3">
+    <div class="col-md-7 m-3 border-white shadow p-3 bg-body rounded">
+      <div class="card border-white bg-white">
+        <div class="card-header border-white bg-white text-info fw-bold">
+          BANK OPERATIONS
+        </div>
+        <div class="text-bg-danger" *ngIf="errorMessage2">{{errorMessage2}}</div>
         <div *ngIf="accountOperations" class="card-body">
           <table class="table table-borderless ">
             <thead class="fw-bold">
@@ -32,7 +33,7 @@
             </tr>
             </thead>
             <tbody *ngIf="end">
-            <tr *ngFor="let operation of accountOperations  | paginate: { itemsPerPage: 6, currentPage: end }" >
+            <tr *ngFor="let operation of accountOperations  | paginate: { itemsPerPage: 5, currentPage: end }" >
               <td>{{operation.id}}</td>
               <td>{{operation.operationDate}}</td>
               <td>{{operation.amount}}</td>
@@ -44,18 +45,19 @@
             </tbody>
           </table>
         </div>
-        <div class="card-footer" align="center">
+        <div class="card-footer border-white bg-white" align="center" >
           <pagination-controls (pageChange)="end = $event"></pagination-controls>
         </div>
       </div>
     </div>
-    <div class="col col-md-4">
-      <div class="card">
-        <div class="card-header">
-          New Bank operations:
+    <div class="col-md-4 m-3 border-white shadow p-3 bg-body rounded">
+      <div class="card border-white bg-white">
+        <div class="card-header border-white bg-white text-info fw-bold">
+          NEW BANK OPERATION
         </div>
-          <div class="text-bg-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
-          <form [formGroup]="newOperationFormGroup" (ngSubmit)="onSaveOperation()">
+          <div class="text-bg-danger" *ngIf="errorMessage3 != null">{{errorMessage3}}</div>
+          <div class="text-bg-danger" *ngFor="let mssge of errorMessages3 ">{{mssge}}</div>
+          <form [formGroup]="newOperationFormGroup" >
             <div class="card-body">
               <div class="mb-3">
                 <label class="form-label">Operation type : </label>
@@ -82,8 +84,8 @@
                 <input type="text" formControlName="description" class="form-control">
               </div>
           </div>
-            <div class="card-footer">
-              <button class="btn btn-success">Save</button>
+            <div class="card-footer border-white bg-white">
+              <button class="btn btn-success" (click)="onSaveOperation()">Save</button>
             </div>
           </form>
       </div>

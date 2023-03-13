@@ -15,13 +15,13 @@ export class OperationService {
 
 
   saveDebitOperation(operationDto: any) :Observable<any>{
-    return  this.http.post<Customer>("http://localhost:8086/Transaction_JaxRS/retrait",operationDto);
+    return  this.http.post<AccountOperation>("http://localhost:8086/Transaction_JaxRS/retrait",operationDto);
   }
   saveCreditOperation(operationDto: any) :Observable<any>{
-    return  this.http.post<Customer>("http://localhost:8086/Transaction_JaxRS/virement",operationDto);
+    return  this.http.post<AccountOperation>("http://localhost:8086/Transaction_JaxRS/virement",operationDto);
   }
   saveTransferOperation(operationDto: any) :Observable<any>{
-    return  this.http.post<Customer>("http://localhost:8086/Transaction_JaxRS/transfer",operationDto);
+    return  this.http.post<AccountOperation>("http://localhost:8086/Transaction_JaxRS/transfer",operationDto);
   }
 
   getOperations() : Observable<Array<AccountOperation>>{

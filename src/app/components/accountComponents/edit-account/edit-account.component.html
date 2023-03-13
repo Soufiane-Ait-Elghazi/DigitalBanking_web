@@ -23,10 +23,10 @@
             <label class="form-label fw-bold">Status : </label>
           </div>
           <div class="btn-group btn-group-sm ">
-            <button type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">Created</button>
-            <button type="button" class="btn btn-warning m-1" (click)="updateStatus('ACTIVATED')">Activated</button>
-            <button type="button" class="btn btn-primary m-1" (click)="updateStatus('SUSPENDED')">Suspended</button>
-            <button type="button" class="btn btn-danger m-1" (click)="updateStatus('BLOCKED')">Blocked</button>
+            <button [disabled]="true" type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">Created</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'ACTIVATED' "type="button" class="btn btn-warning m-1 text-white" (click)="updateStatus('ACTIVATED')">Activated</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'SUSPENDED'" type="button" class="btn btn-primary m-1" (click)="updateStatus('SUSPENDED')">Suspended</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'BLOCKED'" type="button" class="btn btn-danger m-1" (click)="updateStatus('BLOCKED')">Blocked</button>
           </div>
         </div>
 

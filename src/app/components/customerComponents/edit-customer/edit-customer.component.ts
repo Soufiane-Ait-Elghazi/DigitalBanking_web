@@ -68,4 +68,13 @@ export class EditCustomerComponent implements OnInit{
   }
 
 
+  reload() {
+    let id = this.route.snapshot.params['id'];
+    this.customerService.getCustomer(id).subscribe((data:Customer)=>{
+      this.editCustomer=data;
+      this.editCustomerFormGroup.setValue(this.editCustomer);
+    },error => {
+      this.errorMessage = error.message;
+    });
+  }
 }

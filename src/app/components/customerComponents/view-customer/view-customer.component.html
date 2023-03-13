@@ -1,23 +1,37 @@
 
-  <div class="container mt-2">
-    <div class="card">
-      <div class="card-header">Bank account :</div>
+
+
+
+  <div class="container-fluid col-md-8 mb-3 border-white shadow p-3 bg-body rounded">
+    <div class="card border-white bg-white mb-3">
+      <div class="card-header border-white bg-white">
+        <div class="row">
+          <div class="h3 col-11 card-header bg-white fw-bolder border-white text-info">CUSTOMER DETAILS</div>
+          <div class="col-1">
+            <button (click)="reload()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+          </div>
+        </div>
+      </div>
       <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
       <div *ngIf="customer" class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item fw-bolder">ID : {{customer.id}}</li>
-            <li class="list-group-item fw-bolder">Full name : {{customer.firstName +" "+ customer.lastName}}</li>
-            <li class="list-group-item fw-bolder">Email : {{customer.email}}</li>
-            <li class="list-group-item fw-bolder">Address : {{customer.address}}</li>
-            <li class="list-group-item fw-bolder">City : {{customer.city}}</li>
-            <li class="list-group-item fw-bolder">Country : {{customer.countryCode}}</li>
+          <ul class="list-group border-white bg-white">
+            <li class="list-group-item fw-bolder border-white">ID : {{customer.id}}</li>
+            <li class="list-group-item fw-bolder border-white">Full name : {{customer.firstName +" "+ customer.lastName}}</li>
+            <li class="list-group-item fw-bolder border-white">CIN : {{customer.cin}}</li>
+            <li class="list-group-item fw-bolder border-white">Birth date : {{customer.birthDate}}</li>
+            <li class="list-group-item fw-bolder border-white">Email : {{customer.email}}</li>
+            <li class="list-group-item fw-bolder border-white">Phone number : {{customer.phoneNumber}}</li>
+            <li class="list-group-item fw-bolder border-white">Address : {{customer.address}}</li>
+            <li class="list-group-item fw-bolder border-white">City : {{customer.city}}</li>
+            <li class="list-group-item fw-bolder border-white">Country : {{customer.countryCode}}</li>
+            <li class="list-group-item fw-bolder border-white">Bank accounts : <a routerLink="/customer-accounts/{{customer.id}}">accounts</a></li>
           </ul>
       </div>
-      <div class="card-footer">
-        <a routerLink="/customers"  class="btn btn-primary  text-white">
-          <span class="bi bi-arrow-left-circle-fill"></span>
-        </a>
-      </div>
+        <div class="card-footer border-white bg-white">
+          <button routerLink="/customers" class="btn btn-primary border-white bg-white  text-primary">
+           <span></span>
+          </button>
+        </div>
     </div>
   </div>
 

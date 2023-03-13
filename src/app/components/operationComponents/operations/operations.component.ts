@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {OperationService} from "../../../services/operation.service";
 import {AccountOperation} from "../../../model/operation";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorDto} from "../../../model/error.model";
 
 
 
@@ -16,10 +18,16 @@ export class OperationsComponent implements  OnInit{
 
   newOperationFormGroup!: FormGroup;
 
-  errorMessage!: String;
+
+
   accountOperations!: Array<AccountOperation>;
   p: number = 1;
   end!: number;
+  errorMessage1!: String;
+  errorMessage2!: String;
+  errorMessage3!: String;
+  error3!: ErrorDto;
+  errorMessages3!: string[];
   ngOnInit(): void {
       this.operationService.getOperations().subscribe({
         next:(data) => {
@@ -30,7 +38,7 @@ export class OperationsComponent implements  OnInit{
             this.end = Math.trunc(this.accountOperations.length / 6)+1
           }
         },
-        error: (err) => {this.errorMessage = err.message}
+        error: (err) => {this.errorMessage2 = err.message}
       });
   }
 
@@ -46,22 +54,19 @@ export class OperationsComponent implements  OnInit{
 
   onSaveOperation() {
     let operationDto = this.newOperationFormGroup.value ;
+    operationDto.amount = this.newOperationFormGroup.controls['amount'].value
     if(this.newOperationFormGroup.controls['operationType'].value =="DEBIT"){
       this.operationService.saveDebitOperation(operationDto).subscribe({
         next:(data) => {
           alert("Operation has been successfully saved !")
           this.newOperationFormGroup.reset();
-          this.router.navigateByUrl("/operations")
+          this.ngOnInit()
         },
-        error: (error) => {
-          if (error.status === 1000) {
-            this.errorMessage = "Customer not found !!";
-          } else if (error.status === 2000) {
-              this.errorMessage = "Account not found !!";
-          } else if (error.status === 6000) {
-            this.errorMessage = "Balance not sufficient !!";
-          } else {
-            this.errorMessage = "Unexpected error";
+        error: (err: HttpErrorResponse) => {
+          if(err.status == 400) {
+            this.error3 = err.error
+            this.errorMessages3 = this.error3.errors
+            this.errorMessage3 = this.error3.message
           }
         }
       });
@@ -71,17 +76,13 @@ export class OperationsComponent implements  OnInit{
         next:(data) => {
           alert("Operation has been successfully saved !")
           this.newOperationFormGroup.reset();
-          this.router.navigateByUrl("/operations")
+          this.ngOnInit()
         },
-        error: (error) => {
-          if (error.status === 1000) {
-            this.errorMessage = "Customer not found !!";
-          } else if (error.status === 2000) {
-            this.errorMessage = "Account not found !!";
-          } else if (error.status === 6000) {
-            this.errorMessage = "Balance not sufficient !!";
-          } else {
-            this.errorMessage = "Unexpected error";
+        error: (err: HttpErrorResponse) => {
+          if(err.status == 400) {
+            this.error3 = err.error
+            this.errorMessages3 = this.error3.errors
+            this.errorMessage3 = this.error3.message
           }
         }
       });
@@ -91,17 +92,14 @@ export class OperationsComponent implements  OnInit{
         next:(data) => {
           alert("Operation has been successfully saved !")
           this.newOperationFormGroup.reset();
-          this.router.navigateByUrl("/operations")
+          this.ngOnInit()
+
         },
-        error: (error) => {
-          if (error.status === 1000) {
-            this.errorMessage = "Customer not found !!";
-          } else if (error.status === 2000) {
-            this.errorMessage = "Account not found !!";
-          } else if (error.status === 6000) {
-            this.errorMessage = "Balance not sufficient !!";
-          } else {
-            this.errorMessage = "Unexpected error";
+        error: (err: HttpErrorResponse) => {
+          if(err.status == 400) {
+            this.error3 = err.error
+            this.errorMessages3 = this.error3.errors
+            this.errorMessage3 = this.error3.message
           }
         }
       });
