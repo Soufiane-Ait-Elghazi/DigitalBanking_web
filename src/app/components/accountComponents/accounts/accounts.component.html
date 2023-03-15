@@ -1,19 +1,26 @@
 
 <div class="container-fluid mt-2">
   <div class="card col-lg-12 mb-3 border-white shadow p-3 bg-body rounded">
-    <div class="card-header bg-primary text-white fw-bold border-white">Bank accounts</div>
+    <div class="h3 card-header bg-white fw-bolder border-white text-info">BANK ACCOUNTS</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <div *ngIf="bankAccounts" class="card-body border-white">
-      <div *ngIf="searchFormGroup">
-        <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchAccount()" class="col-md-6">
-          <div class="input-group">
-            <label class="input-group-text bg-primary text-white">RIB :</label>
-            <input type="text" formControlName="rib" class="form-control" placeholder="XX885741666X">
-            <button class="btn btn-info">
-              <span class="bi bi-search"></span>
-            </button>
+      <div class="row mt-5">
+        <div class="col-11">
+          <div *ngIf="searchFormGroup" class="col-md-7">
+            <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchAccount()">
+              <div class="input-group">
+                <label class="input-group-text bg-info text-white fw-bold">RIB :</label>
+                <input type="text" formControlName="rib" class="form-control" placeholder="XX885741666X">
+                <button class="btn btn-info">
+                  <span class="bi bi-search"></span>
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        <div class="col-1">
+          <button (click)="onGetBankAccounts()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+        </div>
       </div>
       <div *ngIf="!bankAccounts.length" class="bg-white text-danger text-center">
         no bank account
@@ -40,13 +47,13 @@
           <td *ngIf="bankAccounts"><a routerLink="/view-customer/{{account.custId}}">customer</a></td>
 
           <td>
-            <button  *ngIf="bankAccounts"(click)="onDeleteBankAccount(account.id)" class="btn btn-outline-danger border-white"><span class="bi bi-trash"></span></button>
+            <button  *ngIf="bankAccounts"(click)="onDeleteBankAccount(account.id)" class="btn btn-outline-danger border-white"><span class="bi bi-trash-fill"></span></button>
           </td>
           <td>
-            <button *ngIf="bankAccounts" (click)="onViewAccount(account.id)" class="btn btn-outline-primary border-white"><span class="bi bi-eye"></span></button>
+            <button *ngIf="bankAccounts" (click)="onViewAccount(account.id)" class="btn btn-outline-primary border-white"><span class="bi bi-eye-fill"></span></button>
           </td>
           <td>
-            <button *ngIf="bankAccounts" (click)="onEditBankAccount(account.id)" class="btn btn-outline-warning border-white"><span class="bi bi-pen"></span></button>
+            <button *ngIf="bankAccounts" (click)="onEditBankAccount(account.id)" class="btn btn-outline-warning border-white"><span class="bi bi-pencil-fill"></span></button>
           </td>
         </tr>
         </tbody>

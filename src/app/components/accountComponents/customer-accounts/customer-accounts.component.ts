@@ -22,15 +22,24 @@ export class CustomerAccountsComponent {
   constructor(private eventDriverService:EventDriverService,
               private route:ActivatedRoute,
               private bankAccountService:BankAccountService,
-              private router:Router){
+              private router:Router,
+              private customerService:CustomerService){
 
   }
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
     this.bankAccountService.getCustomerBankAccount(id).subscribe({
-      next: (data) => {this.bankAccounts = data;},
+      next: (data) => {this.bankAccounts = data;
+        this.onGetCustomer(id)},
       error: (err) => {this.errorMessage = err.message}
     });
+  }
+  onGetCustomer(id:number){
+    this.customerService.getCustomer(id).subscribe({
+        next:(data)=>{this.customer = data},
+        error:(err)=>{this.errorMessage = err.message}
+      }
+    )
   }
   onEditBankAccount(id: number) {
     this.router.navigateByUrl("edit-account/"+id)
@@ -40,4 +49,7 @@ export class CustomerAccountsComponent {
     this.router.navigateByUrl("view-account/"+id)
   }
 
+  onDeleteBankAccount(id: number) {
+    this.bankAccountService.deleteAccount(id);
+  }
 }

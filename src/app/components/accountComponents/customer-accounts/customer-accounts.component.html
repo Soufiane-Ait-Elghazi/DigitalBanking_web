@@ -1,49 +1,55 @@
 <div class="container mt-2">
-  <div class="card col-lg-12 mb-3">
-    <div class="card-header">Bank accounts</div>
+  <div class="card col-lg-12 mb-3 border-white shadow p-3 bg-body rounded">
+    <div class="h3 card-header bg-white fw-bolder border-white text-info">CUSTOMER ACCOUNTS</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <div *ngIf="bankAccounts" class="card-body">
-      <table class="table table-borderless  mt-3">
-        <thead class="fw-bold">
-        <tr>
-          <td>Id</td>
-          <td>RIB</td>
-          <td>Type</td>
-          <td>Balance</td>
-          <td>Currency</td>
-          <td>Status</td>
-          <td>Creation date</td>
-          <td>Customer</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let account of bankAccounts | paginate: { itemsPerPage: 6, currentPage: p }" >
-          <td>{{account.id}}</td>
-          <td>{{account.rib}}</td>
-          <td>{{account.bankAccountType.type}}</td>
-          <td>{{account.balance}}</td>
-          <td>{{account.currency}}</td>
-          <td>{{account.accountStatus}}</td>
-          <td>{{account.creationDate}}</td>
-          <td><a routerLink="/view-customer/{{account.custId}}">customer details</a></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
-            <button  class="btn btn-danger"><span class="bi bi-trash"></span></button>
-          </td>
-          <td>
-            <button (click)="onViewAccount(account.id)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
-          </td>
-          <td>
-            <button (click)=onEditBankAccount(account.id) class="btn btn-warning"><span class="bi bi-pen"></span></button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card-footer" align="center">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <div class="row border-white shadow p-3 bg-body rounded ">
+        <table class="table table-responsive  mt-3">
+          <thead class="fw-bold text-info">
+          <tr>
+            <td>RIB</td>
+            <td>Type</td>
+            <td>Balance</td>
+            <td>Currency</td>
+            <td>Status</td>
+            <td>Customer</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let account of bankAccounts | paginate: { itemsPerPage: 3, currentPage: p }" >
+            <td>{{account.rib}}</td>
+            <td>{{account.bankAccountType.type}}</td>
+            <td>{{account.balance}}</td>
+            <td>{{account.currency}}</td>
+            <td>{{account.accountStatus}}</td>
+            <td><a routerLink="/view-customer/{{account.custId}}">customer details</a></td>
+            <td>
+              <button  *ngIf="bankAccounts"(click)="onDeleteBankAccount(account.id)" class="btn btn-outline-danger border-white"><span class="bi bi-trash-fill"></span></button>
+            </td>
+            <td>
+              <button *ngIf="bankAccounts" (click)="onViewAccount(account.id)" class="btn btn-outline-primary border-white"><span class="bi bi-eye-fill"></span></button>
+            </td>
+            <td>
+              <button *ngIf="bankAccounts" (click)="onEditBankAccount(account.id)" class="btn btn-outline-warning border-white"><span class="bi bi-pencil-fill"></span></button>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot class=" bg-white border-white text-center" >
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </tfoot>
+        </table>
+      </div>
+      <div class="row mt-3">
+        <div *ngIf="customer" class=" border-white shadow p-3 bg-body rounded">
+          <ul class="list-group border-white bg-white">
+            <li class="list-group-item  border-white text-info">Full name : {{customer.firstName +" "+ customer.lastName}}</li>
+            <li class="list-group-item  border-white text-info">CIN : {{customer.cin}}</li>
+            <li class="list-group-item  border-white text-info">Email : {{customer.email}}</li>
+            <li class="list-group-item  border-white text-info">Phone number : {{customer.phoneNumber}}</li>
+            <li class="list-group-item  border-white text-info" ><a routerLink="/view-customer/{{customer.id}}">Customer details</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

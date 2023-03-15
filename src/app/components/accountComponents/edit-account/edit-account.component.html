@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card col-md-6 offset-3 mt-3 mb-3 border-white .mx-auto shadow p-3 mb-5 bg-body rounded" *ngIf="editBankAccountFormGroup">
-    <div class="card-header bg-primary text-white border-white fw-bold">Edit bank account :</div>
+    <div class="h3 card-header bg-white text-info border-white fw-bold">EDIT BANK ACCOUNT</div>
     <div class="text-bg-danger" *ngIf="error">
       <div class="bg-danger fw-bold" *ngIf="errorMessage">
         {{errorMessage}}
@@ -22,11 +22,11 @@
           <div>
             <label class="form-label fw-bold">Status : </label>
           </div>
-          <div class="btn-group btn-group-sm ">
-            <button [disabled]="true" type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">Created</button>
-            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'ACTIVATED' "type="button" class="btn btn-warning m-1 text-white" (click)="updateStatus('ACTIVATED')">Activated</button>
-            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'SUSPENDED'" type="button" class="btn btn-primary m-1" (click)="updateStatus('SUSPENDED')">Suspended</button>
-            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'BLOCKED'" type="button" class="btn btn-danger m-1" (click)="updateStatus('BLOCKED')">Blocked</button>
+          <div class="btn-group btn-group-lg ">
+            <button [disabled]="true" type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">CREATE</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'ACTIVATED' "type="button" class="btn btn-warning m-1 text-white" (click)="updateStatus('ACTIVATED')">ACTIVATE</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'SUSPENDED'" type="button" class="btn btn-primary m-1" (click)="updateStatus('SUSPENDED')">SUSPEND</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'BLOCKED'" type="button" class="btn btn-danger m-1" (click)="updateStatus('BLOCKED')">BLOCK</button>
           </div>
         </div>
 
