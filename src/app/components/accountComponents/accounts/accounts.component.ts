@@ -27,7 +27,6 @@ export class AccountsComponent {
   }
 
   ngOnInit(): void {
-
     this.onGetBankAccounts()
     this.searchFormGroup = this.fb.group({
       rib :this.fb.control("")
@@ -54,6 +53,8 @@ export class AccountsComponent {
 
 
   onDeleteBankAccount(id: number) {
+    let conf = confirm("Are you sure ?")
+    if(!conf) return;
     this.bankAccountService.deleteAccount(id).subscribe({
       next: (data) => {
         this.deletedBankAccount = data;

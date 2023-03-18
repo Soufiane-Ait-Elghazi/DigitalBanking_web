@@ -50,6 +50,12 @@ export class CustomerAccountsComponent {
   }
 
   onDeleteBankAccount(id: number) {
-    this.bankAccountService.deleteAccount(id);
+    let conf = confirm("Are you sure ?")
+    if(!conf) return;
+    this.bankAccountService.deleteAccount(id).subscribe( {next: (data) => {
+      this.ngOnInit()
+    },
+      error: (err) => {this.errorMessage = err.message}}
+  );
   }
 }

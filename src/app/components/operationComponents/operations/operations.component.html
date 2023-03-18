@@ -1,94 +1,100 @@
-<div class="container-fluid">
-  <div class="card mb-3 align-content-center border-white bg-white">
+<div class="container-fluid  mt-2">
+  <div class="card border-white shadow p-3 bg-body rounded">
     <div class="text-bg-danger" *ngIf="errorMessage1">{{errorMessage1}}</div>
           <div  class="card-body">
-            <div >
-              <form class="col-md-6 ">
-                <div class="input-group">
-                  <label class="input-group-text">Keyword :</label>
-                  <input type="text"  placeholder="soufiane">
-                  <button class="btn btn-info">
-                    <span class="bi bi-search"></span>
-                  </button>
+            <div class="row">
+              <div class="h3 col-md-8 bg-white text-info fw-bold ">BANK OPERATIONS</div>
+              <div class="row mt-5">
+                <div class="col-11">
+                  <div  class="col-md-7">
+                    <form >
+                      <div class="input-group">
+                        <label class="input-group-text bg-info text-white fw-bold">Date:</label>
+                        <input type="date" class="form-control" placeholder="">
+                        <button class="btn btn-info">
+                          <span class="bi bi-search"></span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-              </form>
+                <div class="col-1">
+                  <button (click)="onGetOperations()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+                </div>
+              </div>
+              <div class="col-md-7 border-white shadow p-3 bg-body rounded mx-3">
+                <div class="card border-white bg-white">
+                  <div class="h4 card-header border-white bg-white text-info fw-bold">
+                    BANK OPERATIONS LIST
+                  </div>
+                  <div class="text-bg-danger" *ngIf="errorMessage2">{{errorMessage2}}</div>
+                  <div *ngIf="accountOperations" class="card-body">
+                    <table class="table table-borderless ">
+                      <thead class="fw-bold text-info">
+                      <tr>
+                        <td>Date</td>
+                        <td>Amount</td>
+                        <td>Type</td>
+                      </tr>
+                      </thead>
+                      <tbody *ngIf="end">
+                      <tr *ngFor="let operation of accountOperations  | paginate: { itemsPerPage: 5, currentPage: end }" >
+                        <td>{{operation.operationDate}}</td>
+                        <td>{{operation.amount}}</td>
+                        <td>{{operation.type}}</td>
+                        <td>
+                          <button (click)="onViewOpertion(operation.id)" class="btn btn-outline-primary border-white"><span class="bi bi-eye"></span></button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer border-white bg-white text-primary" align="center" >
+                    <pagination-controls (pageChange)="end = $event"></pagination-controls>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 border-white shadow p-3 bg-body rounded">
+                <div class="card border-white bg-white">
+                  <div class="h4 card-header border-white bg-white text-info fw-bold">
+                    NEW BANK OPERATION
+                  </div>
+                  <div class="text-bg-danger" *ngIf="errorMessage3 != null">{{errorMessage3}}</div>
+                  <div class="text-bg-danger" *ngFor="let mssge of errorMessages3 ">{{mssge}}</div>
+                  <form [formGroup]="newOperationFormGroup" >
+                    <div class="card-body">
+                      <div class="mb-3">
+                        <label class="form-label fw-bold text-info">Operation type : </label>
+                        <p>
+                          <input type="radio" value="DEBIT" formControlName="operationType"> DEBIT
+                          <input type="radio" value="CREDIT" formControlName="operationType"> CREDIT
+                          <input type="radio" value="TRANSFER" formControlName="operationType"> TRANSFER
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label fw-bold text-info">Account Source RIB :</label>
+                        <input  type="text" formControlName="accountSourceRIB" class="form-control">
+                      </div>
+                      <div class="mb-3" *ngIf="newOperationFormGroup.controls['operationType'].value ==='TRANSFER'">
+                        <label class="form-label fw-bold text-info">Account Destination RIB :</label>
+                        <input  type="text" formControlName="accountDestinationRIB" class="form-control">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label fw-bold text-info">Amount :</label>
+                        <input type="text" formControlName="amount" class="form-control">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label fw-bold text-info">Descripetion :</label>
+                        <input type="text" formControlName="description" class="form-control">
+                      </div>
+                    </div>
+                    <div class="card-footer border-white bg-white">
+                      <button class="btn btn-primary" (click)="onSaveOperation()">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
         </div>
      </div>
-  <div class="row m-3">
-    <div class="col-md-7 m-3 border-white shadow p-3 bg-body rounded">
-      <div class="card border-white bg-white">
-        <div class="card-header border-white bg-white text-info fw-bold">
-          BANK OPERATIONS
-        </div>
-        <div class="text-bg-danger" *ngIf="errorMessage2">{{errorMessage2}}</div>
-        <div *ngIf="accountOperations" class="card-body">
-          <table class="table table-borderless ">
-            <thead class="fw-bold">
-            <tr>
-              <td>Id</td>
-              <td>Date</td>
-              <td>Amount</td>
-              <td>Type</td>
-            </tr>
-            </thead>
-            <tbody *ngIf="end">
-            <tr *ngFor="let operation of accountOperations  | paginate: { itemsPerPage: 5, currentPage: end }" >
-              <td>{{operation.id}}</td>
-              <td>{{operation.operationDate}}</td>
-              <td>{{operation.amount}}</td>
-              <td>{{operation.type}}</td>
-              <td>
-                <button (click)="onViewOpertion(operation.id)" class="btn btn-primary"><span class="bi bi-eye"></span></button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card-footer border-white bg-white" align="center" >
-          <pagination-controls (pageChange)="end = $event"></pagination-controls>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 m-3 border-white shadow p-3 bg-body rounded">
-      <div class="card border-white bg-white">
-        <div class="card-header border-white bg-white text-info fw-bold">
-          NEW BANK OPERATION
-        </div>
-          <div class="text-bg-danger" *ngIf="errorMessage3 != null">{{errorMessage3}}</div>
-          <div class="text-bg-danger" *ngFor="let mssge of errorMessages3 ">{{mssge}}</div>
-          <form [formGroup]="newOperationFormGroup" >
-            <div class="card-body">
-              <div class="mb-3">
-                <label class="form-label">Operation type : </label>
-                <p>
-                  <input type="radio" value="DEBIT" formControlName="operationType"> DEBIT
-                  <input type="radio" value="CREDIT" formControlName="operationType"> CREDIT
-                  <input type="radio" value="TRANSFER" formControlName="operationType"> TRANSFER
-                </p>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Account Source RIB :</label>
-                <input  type="text" formControlName="accountSourceRIB" class="form-control">
-              </div>
-              <div class="mb-3" *ngIf="newOperationFormGroup.controls['operationType'].value ==='TRANSFER'">
-                <label class="form-label">Account Destination RIB :</label>
-                <input  type="text" formControlName="accountDestinationRIB" class="form-control">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Amount :</label>
-                <input type="text" formControlName="amount" class="form-control">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Descripetion :</label>
-                <input type="text" formControlName="description" class="form-control">
-              </div>
-          </div>
-            <div class="card-footer border-white bg-white">
-              <button class="btn btn-success" (click)="onSaveOperation()">Save</button>
-            </div>
-          </form>
-      </div>
-    </div>
-  </div>
 </div>

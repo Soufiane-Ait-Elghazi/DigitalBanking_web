@@ -111,4 +111,9 @@ export class OperationsComponent implements  OnInit{
   onViewOpertion(id: number) {
     this.router.navigateByUrl("/view-operation/"+id)
   }
+
+  onGetOperations() {
+    this.newOperationFormGroup.reset()
+    this.ngOnInit()
+  }
 }

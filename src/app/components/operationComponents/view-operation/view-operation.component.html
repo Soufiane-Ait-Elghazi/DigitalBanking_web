@@ -1,20 +1,20 @@
 
-<div class="container mt-2">
-  <div class="card">
-    <div class="card-header">Account operation :</div>
+<div class="container col-md-8 mt-2">
+  <div class="card shadow p-2 bg-body rounded border-white">
+    <div class="h3 card-header bg-white fw-bold text-info fw-bold border-white ">ACCOUNT OPERATION</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
-    <div *ngIf="operation" class="card-body">
+    <div *ngIf="operation" class="card-body border-white">
       <ul class="list-group">
-        <li class="list-group-item fw-bolder">ID : {{operation.id}}</li>
-        <li class="list-group-item fw-bolder">Type : {{operation.type}}</li>
-        <li class="list-group-item fw-bolder">Amount : {{operation.amount}}</li>
-        <li class="list-group-item fw-bolder">Date : {{operation.operationDate}}</li>
-        <li class="list-group-item fw-bolder">Account RIB : {{operation.bankAccount.rib}}</li>
+        <li class="list-group-item fw-bolder  border-white">ID : {{operation.id}}</li>
+        <li class="list-group-item fw-bolder  border-white">Type : {{operation.type}}</li>
+        <li class="list-group-item fw-bolder  border-white">Amount : {{operation.amount}}</li>
+        <li class="list-group-item fw-bolder  border-white">Date : {{operation.operationDate}}</li>
+        <li class="list-group-item fw-bolder  border-white">Account RIB : {{operation.bankAccount.rib}}</li>
       </ul>
     </div>
-    <div class="card-footer">
-      <a routerLink="/operations"  class="btn btn-primary  text-white">
-        <span class="bi bi-arrow-left-circle-fill"></span>
+    <div class="card-footer bg-white border-white">
+      <a routerLink="/operations"  class=" border-white  text-white">
+        <span class="bi bi-arrow-left-circle-fill text-primary"></span>
       </a>
     </div>
   </div>

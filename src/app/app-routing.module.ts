@@ -21,6 +21,7 @@ const routes:Routes=[
   {path:"operations",component: OperationsComponent},
   {path:"new-customer",component: NewCustomerComponent},
   {path:"new-account",component: NewAccountComponent},
+  {path:"new-operation",component: OperationsComponent},
   {path:"customer-accounts/:id",component: CustomerAccountsComponent},
   {path:"view-customer/:id",component: ViewCustomerComponent},
   {path:"view-account/:id",component: ViewAccountComponent},

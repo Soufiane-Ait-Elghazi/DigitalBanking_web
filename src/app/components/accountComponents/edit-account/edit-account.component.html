@@ -15,12 +15,12 @@
       <div class="card-body">
 
         <div class="mb-3">
-          <label class="form-label fw-bold">Balance : </label>
+          <label class="form-label fw-bold text-info">Balance : </label>
           <input type="number" min="100" formControlName="balance" class="form-control">
         </div>
         <div class="mb-3">
           <div>
-            <label class="form-label fw-bold">Status : </label>
+            <label class="form-label fw-bold text-info">Status : </label>
           </div>
           <div class="btn-group btn-group-lg ">
             <button [disabled]="true" type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">CREATE</button>
@@ -32,7 +32,7 @@
 
 
       <div class="mb-3">
-        <label class="form-label fw-bold">Account Currency : </label>
+        <label class="form-label fw-bold text-info">Account Currency : </label>
           <select formControlName="currency" class="form-select form-select-sm mb-3 " aria-label=".form-select-lg example">
             <option value="MAD">MAD</option>
             <option value="EUR">EUR</option>

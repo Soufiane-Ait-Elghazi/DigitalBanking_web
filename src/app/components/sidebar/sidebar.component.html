@@ -5,13 +5,13 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="nav-item">
             <a href="/home" class="nav-link align-middle px-0">
-              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Home</span>
             </a>
           </li>
 
           <li>
             <a href="#Accounts" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-bank2"></i> <span class="ms-1 d-none d-sm-inline">Bank Accounts</span> </a>
+              <i class="fs-4 bi-bank2"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Bank Accounts</span> </a>
             <ul class="collapse nav flex-column ms-1 " id="Accounts" data-bs-parent="#menu">
               <li class="w-100">
                 <a routerLink="bank-accounts" class="nav-link px-lg-2"> <span class="d-none d-sm-inline">Bank accounts list</span></a>
@@ -24,7 +24,7 @@
 
           <li>
             <a href="#Customers" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Bank Customers</span> </a>
+              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Bank Customers</span> </a>
             <ul class="collapse nav flex-column ms-1" id="Customers" data-bs-parent="#menu">
               <li class="w-100">
                 <a routerLink="customers" class="nav-link px-lg-2"> <span class="d-none d-sm-inline">Bank customers list</span></a>
@@ -36,27 +36,32 @@
           </li>
           <li>
             <a href="#Operations" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Bank Operations</span> </a>
+              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Bank Operations</span> </a>
             <ul class="collapse nav flex-column ms-1" id="Operations" data-bs-parent="#menu">
               <li class="w-100">
                 <a routerLink="operations" class="nav-link px-lg-2"> <span class="d-none d-sm-inline">Bank operations list</span></a>
               </li>
               <li>
-                <a routerLink="" class="nav-link px-lg-2"> <span class="d-none d-sm-inline">xxxx</span></a>
+                <a routerLink="new-operation" class="nav-link px-lg-2"> <span class="d-none d-sm-inline">New bank operation</span></a>
               </li>
             </ul>
           </li>
           <li>
             <a href="#Cards" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-              <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Bank Cards</span></a>
+              <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Bank Cards</span></a>
             <ul class="collapse nav flex-column ms-1" id="Cards" data-bs-parent="#menu">
               <li class="w-100">
-                <a href="#" class="nav-link px-lg-3"> <span class="d-none d-sm-inline">Bank cards list</span> 1</a>
+                <a routerLink="home" class="nav-link px-lg-3"> <span class="d-none d-sm-inline">Bank cards list</span> 1</a>
               </li>
               <li>
-                <a href="#" class="nav-link px-lg-3"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                <a routerLink="home" class="nav-link px-lg-3"> <span class="d-none d-sm-inline">Item</span> 2</a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item mt-5">
+            <a routerLink="login" class="nav-link align-middle px-0">
+              <i class="fa fa-sign-in"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Login</span>
+            </a>
           </li>
         </ul>
       </div>

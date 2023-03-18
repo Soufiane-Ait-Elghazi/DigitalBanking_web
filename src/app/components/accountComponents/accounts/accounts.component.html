@@ -23,11 +23,11 @@
         </div>
       </div>
       <div *ngIf="!bankAccounts.length" class="bg-white text-danger text-center">
-        no bank account
+        No bank accounts
       </div>
 
       <table class="table table-responsive  mt-3" *ngIf="bankAccounts.length > 0">
-        <thead class="fw-bold">
+        <thead class="fw-bold text-info">
         <tr>
           <td>RIB</td>
           <td>Type</td>
