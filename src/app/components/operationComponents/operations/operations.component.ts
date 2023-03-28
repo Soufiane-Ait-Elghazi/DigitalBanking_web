@@ -47,7 +47,7 @@ export class OperationsComponent implements  OnInit{
       operationType : this.fb.control(null),
       accountSourceRIB : this.fb.control(""),
       accountDestinationRIB : this.fb.control(""),
-      amount : this.fb.control(0),
+      amount : this.fb.control(null),
       description : this.fb.control("",[Validators.required,Validators.minLength(4)])
     })
   }
@@ -66,7 +66,7 @@ export class OperationsComponent implements  OnInit{
           if(err.status == 400) {
             this.error3 = err.error
             this.errorMessages3 = this.error3.errors
-            this.errorMessage3 = this.error3.message
+            this.errorMessage3 = this.error3.errorDescription
           }
         }
       });
@@ -82,7 +82,7 @@ export class OperationsComponent implements  OnInit{
           if(err.status == 400) {
             this.error3 = err.error
             this.errorMessages3 = this.error3.errors
-            this.errorMessage3 = this.error3.message
+            this.errorMessage3 = this.error3.errorDescription
           }
         }
       });
@@ -99,7 +99,7 @@ export class OperationsComponent implements  OnInit{
           if(err.status == 400) {
             this.error3 = err.error
             this.errorMessages3 = this.error3.errors
-            this.errorMessage3 = this.error3.message
+            this.errorMessage3 = this.error3.errorDescription
           }
         }
       });

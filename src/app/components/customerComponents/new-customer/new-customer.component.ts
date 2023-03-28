@@ -46,7 +46,7 @@ export class NewCustomerComponent {
           if(err.status == 400) {
             this.error = err.error
             this.errorMessages = this.error.errors
-            this.errorMessage = this.error.message
+            this.errorMessage = this.error.errorDescription
           }
        }
      });

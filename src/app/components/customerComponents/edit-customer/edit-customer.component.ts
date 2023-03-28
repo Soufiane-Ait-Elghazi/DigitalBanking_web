@@ -58,9 +58,9 @@ export class EditCustomerComponent implements OnInit{
         if(err.status == 400) {
           this.error = err.error
           console.log(this.error.httpCode);
-          console.log(this.error.errorCode);
+          console.log(this.error.errorID);
           console.log(this.error.errors);
-          this.errorMessage = this.error.message
+          this.errorMessage = this.error.errorDescription
           this.errorMessages == this.error.errors
         }
       }

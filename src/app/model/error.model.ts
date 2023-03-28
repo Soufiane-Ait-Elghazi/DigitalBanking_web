@@ -1,6 +1,6 @@
 export interface ErrorDto {
   httpCode:   number;
-  errorCode: string;
-  message:    string;
+  errorID: string;
+  errorDescription:    string;
   errors:     string[];
 }

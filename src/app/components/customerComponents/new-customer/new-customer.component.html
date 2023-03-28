@@ -7,11 +7,11 @@
       </div>
     </div>
     <div class="text-bg-danger" *ngIf="error">
-      <div class="bg-white text-danger fw-bold" *ngIf="errorMessage">
+      <div class="text-white fw-bold bg-danger" *ngIf="errorMessage">
         {{errorMessage}}
       </div>
         <div  *ngIf="error.errors">
-          <div class="bg-white text-danger" *ngFor="let errorMessage of error.errors ">
+          <div class="text-white bg-danger" *ngFor="let errorMessage of error.errors ">
             {{errorMessage}}
           </div>
         </div>

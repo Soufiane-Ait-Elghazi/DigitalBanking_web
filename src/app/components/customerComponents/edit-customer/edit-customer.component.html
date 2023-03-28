@@ -7,11 +7,11 @@
       </div>
     </div>
     <div class="mt-2" *ngIf="error">
-      <div class="text-danger fw-bold bg-white" *ngIf="errorMessage">
+      <div class="text-white fw-bold bg-danger" *ngIf="errorMessage">
         {{errorMessage}}
       </div>
       <div  *ngIf="error.errors">
-        <div class="text-danger bg-white" *ngFor="let errorMessage of error.errors ">
+        <div class="text-white bg-danger" *ngFor="let errorMessage of error.errors ">
           {{errorMessage}}
         </div>
       </div>
