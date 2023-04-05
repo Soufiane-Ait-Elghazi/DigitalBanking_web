@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Customer} from "../model/customer.model";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
   customers : any
-  constructor(private http : HttpClient){ }
+  constructor(private http : HttpClient,private authenticationService:AuthenticationService){ }
 
   public getCustomers():Observable<Array<Customer>>{
-    return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers");
+    return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers",
+      {headers:{'authorization':'Bearer '+ this.authenticationService.getToken()}});
   }
   public getCustomer(id: number):Observable<Customer>{
     return  this.http.get<Customer>("http://localhost:8086/Customer_JaxRS/customers/"+id);

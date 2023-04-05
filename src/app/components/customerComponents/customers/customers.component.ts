@@ -18,6 +18,8 @@ export class CustomersComponent implements OnInit{
   searchFormGroup!: FormGroup;
   private deletedCustomer!: Customer;
   p: number= 1;
+  showConfirmModal!:boolean;
+  private conf !: boolean;
   constructor(private customerService : CustomerService,
               private fb:FormBuilder,
               private router:Router,
@@ -49,8 +51,9 @@ export class CustomersComponent implements OnInit{
 
 
   onDeleteCustomer(customerId: number) {
-    let conf = confirm("Are you sure ?")
-    if(!conf) return;
+    this.showConfirmModal = true
+   // let conf = confirm("Are you sure ?")
+    if(!this.conf) return;
     this.customerService.deleteCustomer(customerId).subscribe({
       next: (data) => {
         this.deletedCustomer = data;
@@ -68,5 +71,10 @@ export class CustomersComponent implements OnInit{
   onEditCustomer(customer: Customer) {
     this.eventDriverService.publishEvent({type:CustomerActionsTypes.EDIT_CUSTOMER,payload:customer});
     this.router.navigateByUrl("edit-customer/"+customer.id)
+  }
+
+
+  change($event: boolean) {
+    this.showConfirmModal = $event
   }
 }

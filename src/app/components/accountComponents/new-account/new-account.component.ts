@@ -4,7 +4,6 @@ import {Router} from "@angular/router";
 import {BankAccountService} from "../../../services/bank-account.service";
 import {BankAccount} from "../../../model/bankAccount.model";
 import {BankAccountType} from "../../../model/BankAccountType";
-import {Customer} from "../../../model/customer.model";
 import {CustomerService} from "../../../services/customer.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ErrorDto} from "../../../model/error.model";

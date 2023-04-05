@@ -2,6 +2,7 @@
   <div class="card mb-3 border-white shadow p-3 bg-body rounded">
     <div class=" h3 card-header bg-white fw-bolder border-white text-info">BANK CUSTOMERS</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <app-confirm-modal *ngIf="showConfirmModal" [title]="'Confirm Delete'" (confirm)="change($event)"></app-confirm-modal>
     <div *ngIf="customers" class="card-body ">
       <div class="row mt-5">
         <div class="col-11">

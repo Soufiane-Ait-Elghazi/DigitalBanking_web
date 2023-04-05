@@ -7,8 +7,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CustomersComponent } from './components/customerComponents/customers/customers.component';
 import { AccountsComponent } from './components/accountComponents/accounts/accounts.component';
 import { HomeComponent } from './components/home/home.component';
-import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NewCustomerComponent } from './components/customerComponents/new-customer/new-customer.component';
 import {ViewCustomerComponent } from './components/customerComponents/view-customer/view-customer.component';
 import {EditCustomerComponent } from './components/customerComponents/edit-customer/edit-customer.component';
@@ -22,6 +22,8 @@ import { EditAccountComponent } from './components/accountComponents/edit-accoun
 import { ViewAccountComponent } from './components/accountComponents/view-account/view-account.component';
 import { ViewOperationComponent } from './components/operationComponents/view-operation/view-operation.component';
 import { LoginComponent } from './components/login/login.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { RequestInterceptorService } from './services/request-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,16 +43,18 @@ import { LoginComponent } from './components/login/login.component';
     EditAccountComponent,
     ViewAccountComponent,
     ViewOperationComponent,
-    LoginComponent
+    LoginComponent,
+    ConfirmModalComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        NgxPaginationModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    FormsModule
+  ],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:RequestInterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
