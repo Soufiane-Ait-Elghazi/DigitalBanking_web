@@ -2,18 +2,21 @@
 
 <div class="modal">
   <div class="modal-content">
-    <div >
+    <div class="text-center">
+      <img  style="height: 130px;width: 200px" src="assets/images/HPS.jpg">
+    </div>
+    <div>
       <div class="card border-white bg-white">
-        <div class="card-header h2 text-info border-white bg-white text-center">Login</div>
-        <div *ngIf=" mode== 1" class="alert alert-danger">Bad credintials </div>
+        <div class="card-header h2 text-info border-white bg-white  fw-bold">Login</div>
+        <div *ngIf=" mode== 1" class="alert alert-danger">Bad credentials !!</div>
         <div class="card-body border-white bg-white">
           <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
             <div class="form-group">
-              <label class="control-label">Username :</label>
+              <label class="control-label text-info fw-bold">Username :</label>
               <input type="text" name="username" class="form-control" ngModel>
             </div>
             <div class="form-group">
-              <label class="control-label">Password :</label>
+              <label class="control-label text-info fw-bold">Password :</label>
               <input type="password" name="password" class="form-control" ngModel>
             </div>
             <button class="btn btn-primary mt-3" type="submit">Login</button>

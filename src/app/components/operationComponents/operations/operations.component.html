@@ -1,4 +1,4 @@
-<div class="container-fluid  mt-2">
+<div class="container-fluid  mt-2" *ngIf="authenticationService.isAdmin()">
   <div class="card border-white shadow p-3 bg-body rounded">
     <div class="text-bg-danger" *ngIf="errorMessage1">{{errorMessage1}}</div>
           <div  class="card-body">

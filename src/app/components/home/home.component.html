@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
@@ -11,7 +11,7 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Sales</h5>
+          <h5 class="card-title">Bank customers</h5>
           <p class="card-text"></p>
         </div>
       </div>
@@ -19,7 +19,33 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Orders</h5>
+          <h5 class="card-title">Bank accounts</h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bank cards</h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bank account types</h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bank transactions</h5>
           <p class="card-text"></p>
         </div>
       </div>
@@ -27,17 +53,19 @@
   </div>
 </div>
 
-<div class="row align-content-center mt-3">
+
+<div class="row  mt-3">
+  <div class="col-md-6" style="height: 20px">
+    <div class="chart-container">
+      <canvas  id="MyChart2" >{{ chart2 }}</canvas>
+    </div>
+  </div>
   <div class="col-md-6">
     <div class="chart-container">
       <canvas  id="MyChart1" >{{ chart1 }}</canvas>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="chart-container">
-      <canvas  id="MyChart2" >{{ chart2 }}</canvas>
-    </div>
-  </div>
+
 </div>
 
 

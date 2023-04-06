@@ -5,6 +5,7 @@ import {OperationService} from "../../../services/operation.service";
 import {AccountOperation} from "../../../model/operation";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ErrorDto} from "../../../model/error.model";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 
 
@@ -28,6 +29,7 @@ export class OperationsComponent implements  OnInit{
   errorMessage3!: String;
   error3!: ErrorDto;
   errorMessages3!: string[];
+
   ngOnInit(): void {
       this.operationService.getOperations().subscribe({
         next:(data) => {
@@ -42,7 +44,7 @@ export class OperationsComponent implements  OnInit{
       });
   }
 
-  constructor(private operationService : OperationService, private fb:FormBuilder,private router :Router) {
+  constructor(public authenticationService: AuthenticationService ,private operationService : OperationService, private fb:FormBuilder,private router :Router) {
     this.newOperationFormGroup = this.fb.group({
       operationType : this.fb.control(null),
       accountSourceRIB : this.fb.control(""),
@@ -50,6 +52,7 @@ export class OperationsComponent implements  OnInit{
       amount : this.fb.control(null),
       description : this.fb.control("",[Validators.required,Validators.minLength(4)])
     })
+
   }
 
   onSaveOperation() {

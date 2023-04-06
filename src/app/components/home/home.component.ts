@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit{
 
     });
     this.chart2 = new Chart("MyChart2", {
-      type: 'scatter', //this denotes tha type of chart
+      type: 'bar', //this denotes tha type of chart
 
       data: {
         // values on X-Axis
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit{
             label: "Sales",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
-            backgroundColor: 'blue'
+            backgroundColor: 'info'
           },
           {
             label: "Tests",
