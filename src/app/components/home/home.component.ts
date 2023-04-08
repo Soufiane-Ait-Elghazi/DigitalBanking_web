@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from "chart.js/auto";
 import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,11 @@ export class HomeComponent implements OnInit{
 
   public chart1: any;
   public chart2: any;
-  constructor(public authenticationService :AuthenticationService) {
+  constructor(public authenticationService :AuthenticationService ,private router :Router) {
   }
   ngOnInit(): void {
     this.authenticationService.saveToken(this.authenticationService.getToken())
+    this.router.navigateByUrl('/home')
     this.chart1 = new Chart("MyChart1", {
       type: 'radar', //this denotes tha type of chart
 

@@ -16,6 +16,9 @@
           </div>
         </div>
     </div>
+    <app-creation-modal *ngIf="showConfirmModal"
+                        [title]="'Confirm Customer creation'"
+                        (confirm)="change($event)"></app-creation-modal>
     <form [formGroup]="newCustomerFormGroup" (ngSubmit)="onSaveCustomer()">
       <div class="card-body">
         <div class="row col-lg-12">

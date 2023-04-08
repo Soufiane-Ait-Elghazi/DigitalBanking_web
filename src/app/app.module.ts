@@ -24,6 +24,8 @@ import { ViewOperationComponent } from './components/operationComponents/view-op
 import { LoginComponent } from './components/login/login.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { RequestInterceptorService } from './services/request-interceptor.service';
+import { CreationModalComponent } from './components/creation-modal/creation-modal.component';
+import { NotAutorizedModalComponent } from './components/not-autorized-modal/not-autorized-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { RequestInterceptorService } from './services/request-interceptor.servic
     ViewAccountComponent,
     ViewOperationComponent,
     LoginComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    CreationModalComponent,
+    NotAutorizedModalComponent
   ],
   imports: [
     BrowserModule,

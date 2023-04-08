@@ -1,15 +1,16 @@
 <div class="container mt-2 ">
   <div class="card mb-3 border-white shadow p-3 bg-body rounded">
-    <div class=" h3 card-header bg-white fw-bolder border-white text-info">BANK CUSTOMERS</div>
+    <div class=" h3 card-header bg-white fw-bolder border-white text-primary">BANK CUSTOMERS</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
-    <app-confirm-modal *ngIf="showConfirmModal" [title]="'Confirm Delete'" (confirm)="change($event)"></app-confirm-modal>
+    <app-confirm-modal *ngIf="showConfirmModal" [title]="'Confirm Customer delete'" (confirm)="change($event)"></app-confirm-modal>
+    <app-not-autorized-modal *ngIf="showNotModal" [title]="'Error 403: Unauthorized Access'" (confirm)="changeNote($event)"></app-not-autorized-modal>
     <div *ngIf="customers" class="card-body ">
-      <div class="row mt-5">
+      <div class="row mt-3">
         <div class="col-11">
           <div *ngIf="searchFormGroup">
             <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchCustomer()" class="col-md-6">
               <div class="input-group col align-self-end">
-                <label class="input-group-text text-white bg-info">Keyword</label>
+                <label class="input-group-text text-white bg-primary">Keyword</label>
                 <input type="text" formControlName="keyword" class="form-control" placeholder="PA25XXXX">
                 <button class="btn btn-outline-info ">
                   <span class="bi bi-search"></span>
@@ -19,10 +20,10 @@
           </div>
         </div>
         <div class="col-1">
-          <button (click)="onGetCustomers()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+          <button (click)="onGetCustomers()" class="btn btn-success  border-white rounded-pill"><span class="fa fa-refresh"></span></button>
         </div>
       </div>
-      <table class="table table-sm mt-2">
+      <table class="table table-sm mt-5">
         <thead class="fw-bold text-info">
           <tr>
               <td>Full name</td>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit{
   mode!: number;
-  constructor(private authenticationService:AuthenticationService,private router:Router) {
+  constructor(private authenticationService:AuthenticationService,private router:Router , private route :ActivatedRoute) {
 
   }
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit{
       .subscribe(resp=>{
         let jwt = resp.headers.get('authorization')
         this.authenticationService.saveToken(jwt)
-        this.router.navigateByUrl("/home")
+        this.router.navigateByUrl('/home');
       },err=>{
         this.mode = 1;
       });

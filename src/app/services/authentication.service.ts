@@ -11,6 +11,7 @@ export class AuthenticationService {
 
   private jwToken!: any
   private roles: Array<any> = []
+  private username!: string;
 
   constructor(private http: HttpClient) {
   }
@@ -25,6 +26,8 @@ export class AuthenticationService {
     let jwtHelper = new JwtHelperService();
     const decodedToken = jwtHelper.decodeToken(jwt);
     const roles = decodedToken.roles;
+    const username = decodedToken.sub
+    this.username = username
     this.roles = roles
   }
 
@@ -48,4 +51,13 @@ export class AuthenticationService {
 
   }
 
+  getUsername() {
+    this.jwToken = localStorage.getItem('token');
+    let jwtHelper = new JwtHelperService();
+    const decodedToken = jwtHelper.decodeToken(this.jwToken);
+    const username = decodedToken.sub
+    this.username  = username
+    return this.username;
+
+  }
 }

@@ -30,7 +30,7 @@ const routes:Routes=[
   {path:"edit-account/:id",component: EditAccountComponent},
   {path:"accounts",component: AccountsComponent},
   {path:"login",component: LoginComponent},
-  {path:"",redirectTo:"/home" ,pathMatch:"full"},
+  {path:"",redirectTo:"/login" ,pathMatch:"full"},
   {path:"**",redirectTo:"/login" ,pathMatch:"full"}
 ]
 

@@ -19,6 +19,7 @@ export class EditCustomerComponent implements OnInit{
   errorMessage!: String;
   errorMessages!: String[];
  error!: ErrorDto;
+  showConfirmModal!:boolean;
   constructor(private eventDriverService:EventDriverService,private route:ActivatedRoute, private router : Router, private customerService:CustomerService , private fb : FormBuilder) {
     this.editCustomerFormGroup = this.fb.group({
       id : this.fb.control(""),
@@ -50,9 +51,8 @@ export class EditCustomerComponent implements OnInit{
     this.customerService.editCustomer(cust).subscribe({
       next:(data) => {
         this.editCustomer = data;
-        alert("Customer has been successfully saved !")
-        this.router.navigateByUrl("/customers")
         this.editCustomerFormGroup.reset();
+        this.showConfirmModal = true
       },
       error: (err: HttpErrorResponse) => {
         if(err.status == 400) {
@@ -76,5 +76,10 @@ export class EditCustomerComponent implements OnInit{
     },error => {
       this.errorMessage = error.message;
     });
+  }
+
+  change($event: boolean) {
+    this.showConfirmModal = false
+    this.router.navigateByUrl("/customers")
   }
 }

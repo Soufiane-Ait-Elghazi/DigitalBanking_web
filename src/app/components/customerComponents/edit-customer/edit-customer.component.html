@@ -1,9 +1,9 @@
 <div class="container-fluid col-md-8 mt-3 border-white shadow p-3 bg-body rounded">
   <div class="card border-white bg-white mb-3" *ngIf="editCustomerFormGroup">
     <div class="row">
-      <div class="h3 col-11 card-header bg-white fw-bolder border-white text-info">EDIT CUSTOMER</div>
+      <div class="h3 col-11 card-header bg-white fw-bolder border-white text-primary">EDIT CUSTOMER</div>
       <div class="col-1">
-        <button (click)="reload()" class="btn btn-outline-success btn-lg border-white"><span class="fa fa-refresh"></span></button>
+        <button (click)="reload()" class="btn btn-success  border-white rounded-pill"><span class="fa fa-refresh">  </span></button>
       </div>
     </div>
     <div class="mt-2" *ngIf="error">
@@ -16,6 +16,10 @@
         </div>
       </div>
     </div>
+
+    <app-creation-modal *ngIf="showConfirmModal" [title]="'Confirm edits'"
+                        [message]="'Your information has been updated successfully. Your changes have been saved and will be reflected in your account immediately'"
+                        (confirm)="change($event)"></app-creation-modal>
     <form [formGroup]="editCustomerFormGroup" (ngSubmit)="onSaveCustomer()">
       <div class="card-body">
         <div class="row col-lg-12">
@@ -68,7 +72,7 @@
           </div>
         </div>
         <div class="card-footer border-white bg-white mt-2">
-          <button (click)="onSaveCustomer()" type="button" class="btn btn-primary">Save</button>        </div>
+          <button (click)="onSaveCustomer()" type="button" class="btn btn-primary rounded-pill">Save</button>        </div>
       </div>
     </form>
   </div>

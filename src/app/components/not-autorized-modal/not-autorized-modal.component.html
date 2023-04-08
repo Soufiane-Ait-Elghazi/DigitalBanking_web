@@ -1,0 +1,21 @@
+<div class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">{{ title }}</h4>
+    </div>
+    <div class="modal-body text-center">
+      {{ message }}
+      You do not have permission to access the requested resource.
+      This could be due to a lack of authentication credentials,
+      incorrect permissions, or the resource being removed or unavailable.
+      Please ensure that you have the correct username and password if required,
+      or contact the website owner for assistance.
+      <div class="d-flex align-items-center justify-content-center text-danger">
+        <h1 class="display-1 fw-bold "><span class="fa fa-ban"></span> 403</h1>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-warning text-white rounded-pill" (click)="onConfirm()">login</button>
+    </div>
+  </div>
+</div>

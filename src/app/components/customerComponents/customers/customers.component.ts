@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {EventDriverService} from "../../../services/event.driver.service";
 import {CustomerActionsTypes} from "../../../state/customer.state";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-customers',
@@ -20,6 +21,8 @@ export class CustomersComponent implements OnInit{
   p: number= 1;
   showConfirmModal!:boolean;
   private conf !: boolean;
+  private custID!: number;
+  showNotModal!: boolean;
   constructor(private customerService : CustomerService,
               private fb:FormBuilder,
               private router:Router,
@@ -38,7 +41,12 @@ export class CustomersComponent implements OnInit{
         this.customers = data;
           this.p = 1
         },
-      error: (err) => {this.errorMessage = err.message}
+      error: (err: HttpErrorResponse) => {
+        if(err.status == 403) {
+          this.showNotModal = true
+        }else{
+          this.errorMessage = err.message
+        }}
     });
   }
   onSearchCustomer(){
@@ -51,16 +59,8 @@ export class CustomersComponent implements OnInit{
 
 
   onDeleteCustomer(customerId: number) {
+    this.custID = customerId
     this.showConfirmModal = true
-   // let conf = confirm("Are you sure ?")
-    if(!this.conf) return;
-    this.customerService.deleteCustomer(customerId).subscribe({
-      next: (data) => {
-        this.deletedCustomer = data;
-        this.onGetCustomers()
-        },
-      error: (err) => {this.errorMessage = err.message}
-    });
   }
 
   onViewCustomer(customer: Customer) {
@@ -76,5 +76,19 @@ export class CustomersComponent implements OnInit{
 
   change($event: boolean) {
     this.showConfirmModal = $event
+    if($event==true){
+      this.showConfirmModal =! $event
+      this.customerService.deleteCustomer(this.custID).subscribe({
+        next: (data) => {
+          this.deletedCustomer = data;
+          this.onGetCustomers()
+        },
+        error: (err) => {this.errorMessage = err.message}
+      });
+    }
+  }
+
+  changeNote($event: boolean) {
+
   }
 }

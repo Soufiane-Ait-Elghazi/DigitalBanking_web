@@ -17,6 +17,7 @@ export class NewCustomerComponent {
   errorMessages!: string[];
   error!: ErrorDto;
   errorMessage!: string;
+  showConfirmModal!: boolean;
 
 
   constructor(private customerService : CustomerService, private fb:FormBuilder,private router :Router) {
@@ -38,11 +39,11 @@ export class NewCustomerComponent {
      this.customerService.saveCustomer(customer).subscribe({
         next:(data) => {
          this.savedCustomer = data;
-         alert("Customer has been successfully saved !")
          this.newCustomerFormGroup.reset();
-         this.router.navigateByUrl("/customers")
+         this.showConfirmModal = true
         },
        error: (err: HttpErrorResponse) => {
+         this.showConfirmModal = false
           if(err.status == 400) {
             this.error = err.error
             this.errorMessages = this.error.errors
@@ -55,6 +56,11 @@ export class NewCustomerComponent {
 
   reload() {
     this.newCustomerFormGroup.reset()
+  }
+
+  change($event: boolean) {
+    this.showConfirmModal = false
+    this.router.navigateByUrl("/customers")
   }
 }
 
