@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {EventDriverService} from "../../../services/event.driver.service";
 import {BankAccount} from "../../../model/bankAccount.model";
 import {BankAccountService} from "../../../services/bank-account.service";
-import {CustomerActionsTypes} from "../../../state/customer.state";
+
 
 
 

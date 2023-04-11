@@ -13,6 +13,7 @@ import {ViewAccountComponent} from "./components/accountComponents/view-account/
 import {EditAccountComponent} from "./components/accountComponents/edit-account/edit-account.component";
 import {ViewOperationComponent} from "./components/operationComponents/view-operation/view-operation.component";
 import {LoginComponent} from "./components/login/login.component";
+import {UsersComponent} from "./components/userComponents/users/users.component";
 
 const routes:Routes=[
   {path:"home",component: HomeComponent},
@@ -29,9 +30,10 @@ const routes:Routes=[
   {path:"edit-customer/:id",component: EditCustomerComponent},
   {path:"edit-account/:id",component: EditAccountComponent},
   {path:"accounts",component: AccountsComponent},
+  {path:"users",component: UsersComponent},
   {path:"login",component: LoginComponent},
-  {path:"",redirectTo:"/login" ,pathMatch:"full"},
-  {path:"**",redirectTo:"/login" ,pathMatch:"full"}
+  {path:"",redirectTo:"/home" ,pathMatch:"full"},
+  {path:"**",redirectTo:"/home" ,pathMatch:"full"}
 ]
 
 @NgModule({

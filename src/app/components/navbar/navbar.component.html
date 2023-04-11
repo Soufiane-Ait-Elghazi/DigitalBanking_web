@@ -1,32 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white ">
+<nav class="navbar navbar-expand-lg navbar-light bg-white  ">
   <div class="container-fluid align-items-center">
-    <a class="navbar-brand" href="#"><img height="70" width="100" src="assets/images/HPS.jpg"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#"><img height="40" width="100" src="assets/images/HPS.jpg"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="collapse navbar-collapse" id="navbarSupportedContent ">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0  " >
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="home">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
             Bank accounts
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="new-account">New bank account</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" routerLink="bank-accounts">Bank accounts list</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
             Customers
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="new-customer">New customer</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" routerLink="customers">Customers list</a></li>
           </ul>
         </li>
@@ -34,12 +40,18 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <div >
-          <span >
-            {{authenticatedUser}}
-          </span>
-      </div>
-    </div>
-
+      <ul class="navbar-nav mb-2 text-end">
+        <li class="nav-item fw-bold mx-3">
+          <a  class="nav-link align-middle px-0">
+            <i class="fa fa fa-user-circle"></i> <span class="ms-1 d-none d-sm-inline">{{authenticatedUser}}</span>
+          </a>
+        </li>
+        <li class="nav-item fw-bold mx-3">
+          <a (click)="onlogOut()" routerLink="login" class="nav-link align-middle px-0">
+            <i class="fa fa-sign-out"></i> <span class="ms-1 d-none d-sm-inline">logout</span>
+          </a>
+        </li>
+      </ul>
+    </li>
   </div>
 </nav>

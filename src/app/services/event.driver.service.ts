@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subject} from "rxjs";
-import {ActionEvent} from "../state/customer.state";
+import {ActionEvent} from "../state/app.state";
 
 
 @Injectable({

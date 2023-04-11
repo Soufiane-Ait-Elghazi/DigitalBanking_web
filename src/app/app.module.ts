@@ -26,6 +26,7 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { RequestInterceptorService } from './services/request-interceptor.service';
 import { CreationModalComponent } from './components/creation-modal/creation-modal.component';
 import { NotAutorizedModalComponent } from './components/not-autorized-modal/not-autorized-modal.component';
+import { UsersComponent } from './components/userComponents/users/users.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { NotAutorizedModalComponent } from './components/not-autorized-modal/not
     LoginComponent,
     ConfirmModalComponent,
     CreationModalComponent,
-    NotAutorizedModalComponent
+    NotAutorizedModalComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

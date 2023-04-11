@@ -1,6 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {Tokens, TokensR} from "../components/login/login.component";
+import {AppActionsTypes} from "../state/app.state";
+import {EventDriverService} from "./event.driver.service";
+import {AuToken} from "../model/operation";
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -9,36 +14,58 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthenticationService {
 
 
-  private jwToken!: any
+  private accessToken!: any
+  refreshToken:any;
   private roles: Array<any> = []
   private username!: string;
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient,private eventDriverService : EventDriverService) {
   }
 
-  login(user: any) {
-    return this.http.post("http://localhost:8086/login", user, {observe: 'response'});
+  login(user: any){
+    return this.http.post<Tokens>("http://localhost:8086/login", user);
   }
 
-  public saveToken(jwt: any) {
-    this.jwToken = jwt
-    localStorage.setItem('token', jwt);
+  saveAccessToken(accessToken: string) {
+
+    this.accessToken = accessToken
+    localStorage.setItem('accessToken', accessToken);
     let jwtHelper = new JwtHelperService();
-    const decodedToken = jwtHelper.decodeToken(jwt);
+    const decodedToken = jwtHelper.decodeToken(accessToken);
     const roles = decodedToken.roles;
     const username = decodedToken.sub
     this.username = username
     this.roles = roles
   }
 
-  public getToken(): any {
-    this.jwToken = localStorage.getItem('token');
-    return this.jwToken;
+  saveRefreshToken(refreshToken: string) {
+
+    this.refreshToken = refreshToken
+    localStorage.setItem('refreshToken', refreshToken);
+    let jwtHelper = new JwtHelperService();
+    const decodedToken = jwtHelper.decodeToken(this.accessToken);
+    const roles = decodedToken.roles;
+    const username = decodedToken.sub
+    this.username = username
+    this.roles = roles
   }
 
+  public getAccessToken(){
+    this.accessToken = localStorage.getItem('accessToken');
+    return this.accessToken;
+  }
+  public getRefreshToken(){
+    this.refreshToken = localStorage.getItem('refreshToken');
+    return this.refreshToken;
+  }
+
+
   public logOut() {
-    this.jwToken = null
-    localStorage.removeItem('token')
+    this.accessToken = null
+    this.refreshToken = null
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
 
   }
 
@@ -52,12 +79,49 @@ export class AuthenticationService {
   }
 
   getUsername() {
-    this.jwToken = localStorage.getItem('token');
+    this.accessToken = localStorage.getItem('accessToken');
     let jwtHelper = new JwtHelperService();
-    const decodedToken = jwtHelper.decodeToken(this.jwToken);
+    const decodedToken = jwtHelper.decodeToken(this.accessToken);
     const username = decodedToken.sub
-    this.username  = username
+    const fullName = decodedToken.fullName
+    this.username  = fullName
     return this.username;
 
   }
+
+
+  setAccessToken(accessToken: string) {
+    this.accessToken = accessToken
+    localStorage.removeItem('accessToken')
+    this.saveAccessToken(accessToken)
+
+  }
+
+  isAuthenticated() {
+    for (let r of this.roles) {
+      if (r == 'USER')
+        return true;
+    }
+    return false
+  }
+
+ getNewAccessToken(){
+    console.log("refresh")
+    let a = new AuToken()
+    a.refreshToken ="Bearer "+ this.getRefreshToken()
+    console.log(a)
+    this.http.post<TokensR>("http://localhost:8086/User_controler/refreshToken",a).subscribe((resp:TokensR) => {
+      const refreshToken = resp['refreshToken'];
+      const accessToken = resp['accessToken'];
+      this.saveAccessToken(accessToken)
+      this.saveRefreshToken(refreshToken)
+      this.eventDriverService.publishEvent({
+        type: AppActionsTypes.GET_AUTHENTICATED_USER,
+        payload: this.getUsername()
+      })
+    }, err => {
+      console.log(err.message)
+    });
+  }
+
 }

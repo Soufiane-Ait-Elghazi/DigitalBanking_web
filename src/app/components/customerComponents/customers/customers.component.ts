@@ -3,9 +3,11 @@ import {CustomerService} from "../../../services/customer.service";
 import {Customer} from "../../../model/customer.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {EventDriverService} from "../../../services/event.driver.service";
-import {CustomerActionsTypes} from "../../../state/customer.state";
+
 import {HttpErrorResponse} from "@angular/common/http";
+import {AuthenticationService} from "../../../services/authentication.service";
+import {AppActionsTypes} from "../../../state/app.state";
+import {EventDriverService} from "../../../services/event.driver.service";
 
 @Component({
   selector: 'app-customers',
@@ -26,7 +28,8 @@ export class CustomersComponent implements OnInit{
   constructor(private customerService : CustomerService,
               private fb:FormBuilder,
               private router:Router,
-              private eventDriverService : EventDriverService) {
+              private authenticationService:AuthenticationService,
+              private eventDriverService:EventDriverService) {
   }
 
   ngOnInit(): void {
@@ -35,7 +38,7 @@ export class CustomersComponent implements OnInit{
       keyword :this.fb.control("")
     })
   }
-  onGetCustomers(){
+  onGetCustomers(){-
     this.customerService.getCustomers().subscribe({
       next: (data) => {
         this.customers = data;
@@ -43,8 +46,13 @@ export class CustomersComponent implements OnInit{
         },
       error: (err: HttpErrorResponse) => {
         if(err.status == 403) {
-          this.showNotModal = true
+          if(!this.authenticationService.isAuthenticated()){
+            this.showNotModal = true
+          }else{
+            this.onGetCustomers()
+          }
         }else{
+          this.eventDriverService.publishEvent({type: AppActionsTypes.GET_AUTHENTICATED_USER, payload: this.authenticationService.getUsername()})
           this.errorMessage = err.message
         }}
     });
@@ -52,7 +60,20 @@ export class CustomersComponent implements OnInit{
   onSearchCustomer(){
     this.customerService.searchCustomer(this.searchFormGroup.value.keyword).subscribe({
       next: (data) => {this.customers = data;},
-      error: (err) => {this.errorMessage = err.message}
+      error: (err: HttpErrorResponse) => {
+        if(err.status == 403) {
+          if(!this.authenticationService.isAuthenticated()){
+            this.showNotModal = true
+          }else{
+            this.onSearchCustomer()
+          }
+        }else{
+          this.eventDriverService.publishEvent({
+            type: AppActionsTypes.GET_AUTHENTICATED_USER,
+            payload: this.authenticationService.getUsername()
+          })
+          this.errorMessage = err.message
+        }}
     });
 
   }
@@ -64,13 +85,25 @@ export class CustomersComponent implements OnInit{
   }
 
   onViewCustomer(customer: Customer) {
-    this.eventDriverService.publishEvent({type:CustomerActionsTypes.VIEW_CUSTOMER,payload:customer});
-    this.router.navigateByUrl("view-customer/"+customer.id)
+    if(this.authenticationService.isAuthenticated()){
+      this.eventDriverService.publishEvent({
+        type: AppActionsTypes.GET_AUTHENTICATED_USER,
+        payload: this.authenticationService.getUsername()
+      })
+      this.router.navigateByUrl("view-customer/"+customer.id)
+    }
+
   }
 
   onEditCustomer(customer: Customer) {
-    this.eventDriverService.publishEvent({type:CustomerActionsTypes.EDIT_CUSTOMER,payload:customer});
-    this.router.navigateByUrl("edit-customer/"+customer.id)
+    if(this.authenticationService.isAuthenticated()){
+      this.eventDriverService.publishEvent({
+        type: AppActionsTypes.GET_AUTHENTICATED_USER,
+        payload: this.authenticationService.getUsername()
+      })
+      this.router.navigateByUrl("edit-customer/"+customer.id)
+    }
+
   }
 
 
@@ -83,12 +116,26 @@ export class CustomersComponent implements OnInit{
           this.deletedCustomer = data;
           this.onGetCustomers()
         },
-        error: (err) => {this.errorMessage = err.message}
+        error: (err: HttpErrorResponse) => {
+          if(err.status == 403) {
+            if(!this.authenticationService.isAuthenticated()){
+              this.showNotModal = true
+            }else{
+
+              this.onDeleteCustomer(this.custID)
+            }
+
+          }else{
+            this.eventDriverService.publishEvent({
+              type: AppActionsTypes.GET_AUTHENTICATED_USER,
+              payload: this.authenticationService.getUsername()
+            })
+            this.errorMessage = err.message
+          }}
       });
     }
   }
 
   changeNote($event: boolean) {
-
   }
 }

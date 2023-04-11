@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ConfirmModalComponent {
   @Input() title: string | undefined;
+  @Input()
   @Input() message: string | undefined;
   @Output() confirm = new EventEmitter<boolean>();
 

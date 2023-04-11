@@ -1,6 +1,8 @@
-<div>
-  <app-navbar></app-navbar>
 
+
+<app-login *ngIf="!authenticationService.isAuthenticated()"></app-login>
+<div>
+  <app-navbar ></app-navbar>
       <div class="row " >
         <div class="h-auto col-2 mx-3 mt-2" >
           <app-sidebar></app-sidebar>

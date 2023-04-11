@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from "chart.js/auto";
 import {AuthenticationService} from "../../services/authentication.service";
-import {Router} from "@angular/router";
+import {EventDriverService} from "../../services/event.driver.service";
+import {AppActionsTypes} from "../../state/app.state";
+
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,13 @@ export class HomeComponent implements OnInit{
 
   public chart1: any;
   public chart2: any;
-  constructor(public authenticationService :AuthenticationService ,private router :Router) {
-  }
+
+  constructor(public authenticationService :AuthenticationService,
+              private eventDriverService:EventDriverService){}
   ngOnInit(): void {
-    this.authenticationService.saveToken(this.authenticationService.getToken())
-    this.router.navigateByUrl('/home')
+    this.authenticationService.saveAccessToken(this.authenticationService.getAccessToken())
+    this.authenticationService.saveRefreshToken(this.authenticationService.getRefreshToken())
+    this.eventDriverService.publishEvent({type:AppActionsTypes.GET_AUTHENTICATED_USER,payload:this.authenticationService.getUsername()});
     this.chart1 = new Chart("MyChart1", {
       type: 'radar', //this denotes tha type of chart
 
@@ -29,19 +33,19 @@ export class HomeComponent implements OnInit{
             label: "Sales",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
-            backgroundColor: 'blue'
+            backgroundColor: 'gray'
           },
           {
             label: "Tests",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
-            backgroundColor: 'red'
+            backgroundColor: 'silver'
           },
           {
             label: "Profit",
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
-            backgroundColor: 'limegreen'
+            backgroundColor: 'blue'
           }
         ]
       },
@@ -62,19 +66,19 @@ export class HomeComponent implements OnInit{
             label: "Sales",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
-            backgroundColor: 'info'
+            backgroundColor: 'gray'
           },
           {
             label: "Tests",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
-            backgroundColor: 'red'
+            backgroundColor: 'silver'
           },
           {
             label: "Profit",
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
-            backgroundColor: 'limegreen'
+            backgroundColor: 'blue'
           }
         ]
       },
@@ -85,5 +89,7 @@ export class HomeComponent implements OnInit{
     });
 
   }
+
+
 
 }

@@ -7,3 +7,8 @@ export  interface AccountOperation {
   type:          string;
   bankAccount:   BankAccount;
 }
+
+
+export class AuToken {
+  refreshToken: string ="";
+}

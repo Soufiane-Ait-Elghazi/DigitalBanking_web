@@ -13,7 +13,7 @@ export class CustomerService {
 
   public getCustomers():Observable<Array<Customer>>{
     return  this.http.get<Array<Customer>>("http://localhost:8086/Customer_JaxRS/customers",
-      {headers:{'authorization':'Bearer '+ this.authenticationService.getToken()}});
+      {headers:{'authorization':'Bearer '+ this.authenticationService.getAccessToken()}});
   }
   public getCustomer(id: number):Observable<Customer>{
     return  this.http.get<Customer>("http://localhost:8086/Customer_JaxRS/customers/"+id);
