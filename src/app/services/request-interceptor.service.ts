@@ -25,7 +25,7 @@ export class RequestInterceptorService {
       return next.handle(req2);
     } else if (jwtHelper.isTokenExpired(this.authenticationService.getAccessToken()) && req.url != "http://localhost:8086/User_controler/refreshToken") {
       this.authenticationService.getNewAccessToken()
-      this.sleep(1000)
+
       return next.handle(req)
     } else {
       if (jwtHelper.isTokenExpired(this.authenticationService.getRefreshToken())) console.log("REF EXP")
@@ -33,9 +33,7 @@ export class RequestInterceptorService {
     }
   }
 
-   sleep(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
+
 
 }
 

@@ -14,6 +14,9 @@ import {EditAccountComponent} from "./components/accountComponents/edit-account/
 import {ViewOperationComponent} from "./components/operationComponents/view-operation/view-operation.component";
 import {LoginComponent} from "./components/login/login.component";
 import {UsersComponent} from "./components/userComponents/users/users.component";
+import {NewUserComponent} from "./components/userComponents/new-user/new-user.component";
+import {NewRoleComponent} from "./components/userComponents/new-role/new-role.component";
+import {EditUserComponent} from "./components/userComponents/edit-user/edit-user.component";
 
 const routes:Routes=[
   {path:"home",component: HomeComponent},
@@ -31,7 +34,10 @@ const routes:Routes=[
   {path:"edit-account/:id",component: EditAccountComponent},
   {path:"accounts",component: AccountsComponent},
   {path:"users",component: UsersComponent},
-  {path:"login",component: LoginComponent},
+  {path:"users",component: UsersComponent},
+  {path:"new-user",component: NewUserComponent},
+  {path:"edit-user/:id",component: EditUserComponent},
+  {path:"new-role",component: NewRoleComponent},
   {path:"",redirectTo:"/home" ,pathMatch:"full"},
   {path:"**",redirectTo:"/home" ,pathMatch:"full"}
 ]

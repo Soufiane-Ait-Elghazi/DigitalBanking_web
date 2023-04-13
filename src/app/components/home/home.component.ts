@@ -3,6 +3,7 @@ import {Chart} from "chart.js/auto";
 import {AuthenticationService} from "../../services/authentication.service";
 import {EventDriverService} from "../../services/event.driver.service";
 import {AppActionsTypes} from "../../state/app.state";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -16,8 +17,13 @@ export class HomeComponent implements OnInit{
   public chart2: any;
 
   constructor(public authenticationService :AuthenticationService,
-              private eventDriverService:EventDriverService){}
-  ngOnInit(): void {
+              private eventDriverService:EventDriverService,
+              private router:Router){
+
+
+  }
+  ngOnInit(): void{
+
     this.authenticationService.saveAccessToken(this.authenticationService.getAccessToken())
     this.authenticationService.saveRefreshToken(this.authenticationService.getRefreshToken())
     this.eventDriverService.publishEvent({type:AppActionsTypes.GET_AUTHENTICATED_USER,payload:this.authenticationService.getUsername()});
@@ -30,19 +36,19 @@ export class HomeComponent implements OnInit{
           '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
         datasets: [
           {
-            label: "Sales",
+            label: "Transfer",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
             backgroundColor: 'gray'
           },
           {
-            label: "Tests",
+            label: "Credit",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
             backgroundColor: 'silver'
           },
           {
-            label: "Profit",
+            label: "Debit",
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
             backgroundColor: 'blue'
@@ -63,19 +69,19 @@ export class HomeComponent implements OnInit{
           '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
         datasets: [
           {
-            label: "Sales",
+            label: "Transfer",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
             backgroundColor: 'gray'
           },
           {
-            label: "Tests",
+            label: "Credit",
             data: ['467','576', '572', '79', '92',
               '574', '573', '576'],
             backgroundColor: 'silver'
           },
           {
-            label: "Profit",
+            label: "Debit",
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
             backgroundColor: 'blue'

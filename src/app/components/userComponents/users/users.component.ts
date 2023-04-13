@@ -6,6 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {AppActionsTypes} from "../../../state/app.state";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {EventDriverService} from "../../../services/event.driver.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -22,7 +23,8 @@ export class UsersComponent implements OnInit{
   constructor(private userService :UserService,
               private authenticationService:AuthenticationService,
               private fb:FormBuilder,
-              private eventDriverService:EventDriverService) {
+              private eventDriverService:EventDriverService,
+              private router :Router) {
   }
 
   ngOnInit(): void {
@@ -62,11 +64,28 @@ export class UsersComponent implements OnInit{
   }
 
   onDeleteUser(id: number) {
+    this.userService.deleteUser(id).subscribe({
+      next: (data) => {
+         this.onGetUsers()
+         this.p = 1
+      },
+      error: (err: HttpErrorResponse) => {
+        if(err.status == 403) {
+          if(!this.authenticationService.isAdmin()){
+            this.showNotModal = true
+          }else{
+            this.onGetUsers()
+          }
+        }else{
+          this.eventDriverService.publishEvent({type: AppActionsTypes.GET_AUTHENTICATED_USER, payload: this.authenticationService.getUsername()})
+          this.errorMessage = err.message
+        }}
+    });
 
   }
 
   onEditUser(user: User) {
-
+     this.router.navigateByUrl("/edit-user/"+user.id)
   }
 
 

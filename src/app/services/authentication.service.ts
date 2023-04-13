@@ -6,6 +6,7 @@ import {AppActionsTypes} from "../state/app.state";
 import {EventDriverService} from "./event.driver.service";
 import {AuToken} from "../model/operation";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -20,7 +21,7 @@ export class AuthenticationService {
   private username!: string;
 
 
-  constructor(private http: HttpClient,private eventDriverService : EventDriverService) {
+  constructor(private http: HttpClient,private eventDriverService : EventDriverService,private router:Router) {
   }
 
   login(user: any){
@@ -40,7 +41,6 @@ export class AuthenticationService {
   }
 
   saveRefreshToken(refreshToken: string) {
-
     this.refreshToken = refreshToken
     localStorage.setItem('refreshToken', refreshToken);
     let jwtHelper = new JwtHelperService();
@@ -66,7 +66,7 @@ export class AuthenticationService {
     this.refreshToken = null
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
-
+     window.location.reload()
   }
 
   isAdmin(): boolean {

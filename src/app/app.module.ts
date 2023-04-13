@@ -27,6 +27,9 @@ import { RequestInterceptorService } from './services/request-interceptor.servic
 import { CreationModalComponent } from './components/creation-modal/creation-modal.component';
 import { NotAutorizedModalComponent } from './components/not-autorized-modal/not-autorized-modal.component';
 import { UsersComponent } from './components/userComponents/users/users.component';
+import { NewUserComponent } from './components/userComponents/new-user/new-user.component';
+import { NewRoleComponent } from './components/userComponents/new-role/new-role.component';
+import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { UsersComponent } from './components/userComponents/users/users.componen
     ConfirmModalComponent,
     CreationModalComponent,
     NotAutorizedModalComponent,
-    UsersComponent
+    UsersComponent,
+    NewUserComponent,
+    NewRoleComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

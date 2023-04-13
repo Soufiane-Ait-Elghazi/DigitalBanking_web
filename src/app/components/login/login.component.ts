@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {EventDriverService} from "../../services/event.driver.service";
 import {AppActionsTypes, AppDataState} from "../../state/app.state";
 
@@ -13,17 +12,20 @@ import {AppActionsTypes, AppDataState} from "../../state/app.state";
 })
 export class LoginComponent implements OnInit {
   mode!: number;
+  loading!:boolean
 
 
-  constructor(private authenticationService: AuthenticationService,
+  constructor(public authenticationService: AuthenticationService,
               private router: Router,
               private eventDriverService: EventDriverService) {}
 
   ngOnInit(): void {
+
   }
 
   onLogin(user: any) {
-    this.authenticationService.logOut()
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
     this.authenticationService.login(user)
       .subscribe((resp:Tokens) => {
         const refreshToken = resp['refresh-token'];
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
           type: AppActionsTypes.GET_AUTHENTICATED_USER,
           payload: this.authenticationService.getUsername()
         })
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home')
       }, err => {
         this.mode = 1;
       });

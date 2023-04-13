@@ -22,31 +22,33 @@
           <button (click)="onGetUsers()" class="btn btn-success  border-white rounded-pill"><span class="fa fa-refresh"></span></button>
         </div>
       </div>
-      <table class="table table-sm mt-5">
+      <table class="text-center table table-responsive-sm mt-5">
         <thead class="fw-bold text-info">
         <tr>
-          <td>Full name</td>
-          <td>CIN</td>
-          <td>Email</td>
-          <td>Phone number</td>
-          <td>Address</td>
-          <td>Bank accounts</td>
+          <td>ID</td>
+          <td>Username</td>
+          <td>Activated</td>
+          <td>Roles</td>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of users  | paginate: { itemsPerPage: 7, currentPage: p }" >
+        <tr *ngFor="let user of users  | paginate: { itemsPerPage: 7, currentPage: p }">
 
           <td>{{user.id}}</td>
           <td>{{user.username}}</td>
           <td>{{user.actived}}</td>
-          <td>{{user.roles}}</td>
-          <td><a routerLink="" >accounts</a></td>
+          <td *ngIf="user.roles">
+            <ul *ngFor="let role of user.roles" class="list-group  list-group-flush">
+              <li class="list-group-item p-0 m-0">
+                <span [ngClass]="role.roleName =='USER'?'badge bg-success ':'badge bg-danger '">{{role.roleName.toLocaleLowerCase()}}</span>
+              </li>
+          </ul>
+          </td>
           <td>
             <button (click)="onDeleteUser(user.id)" class="btn btn-outline-danger border-white"><span class="bi bi-trash-fill"></span></button>
-          </td>
-          <td>
             <button  (click)="onEditUser(user)" class="btn btn-outline-warning border-white"><span class="bi bi-pencil-fill"></span></button>
           </td>
+
         </tr>
         </tbody>
       </table>
