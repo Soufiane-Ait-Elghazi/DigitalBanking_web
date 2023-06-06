@@ -1,13 +1,13 @@
 
 <div class="modal">
-  <div class="modal-content">
+  <div class="modal-content d-flex justify-content-center">
     <div class="text-center">
       <img  style="height: 100px;width: 230px" src="assets/images/HPS.jpg">
     </div>
 
     <div>
       <div class="card border-white bg-white">
-        <div *ngIf=" mode== 1" class="alert alert-danger">Bad credentials !!</div>
+        <div *ngIf=" mode == 1" class="alert alert-danger">Bad credentials !!</div>
         <div class="card-body border-white bg-white">
           <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
             <div class="form-group">
@@ -21,7 +21,7 @@
             <div  *ngIf="loading" class="text-center">
               <img style="height: 100px;width: 230px"  src="assets/images/loading.gif">
             </div>
-              <button class=" text-white text-end mt-5 rounded-pill" style="background-color :rgb(163, 163, 168);" type="submit">Login</button>
+              <button class=" text-white btn btn-primary text-end mt-5 rounded-pill"  type="submit">Login</button>
           </form>
         </div>
       </div>

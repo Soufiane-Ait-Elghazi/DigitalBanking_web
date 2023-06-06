@@ -23,14 +23,12 @@
             <label class="form-label fw-bold text-info">Status : </label>
           </div>
           <div class="btn-group btn-group-lg ">
-            <button [disabled]="true" type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">CREATE</button>
-            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'ACTIVATED' "type="button" class="btn btn-warning m-1 text-white" (click)="updateStatus('ACTIVATED')">ACTIVATE</button>
-            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'SUSPENDED'" type="button" class="btn btn-primary m-1" (click)="updateStatus('SUSPENDED')">SUSPEND</button>
-            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'BLOCKED'" type="button" class="btn btn-danger m-1" (click)="updateStatus('BLOCKED')">BLOCK</button>
+            <button [disabled]="true" type="button" class="btn btn-success m-1" (click)="updateStatus('CREATED')">CREATED</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'ACTIVATED' "type="button" class="btn btn-success m-1 text-white" (click)="updateStatus('ACTIVATED')">ACTIVATED</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'SUSPENDED'" type="button" class="btn btn-success m-1" (click)="updateStatus('SUSPENDED')">SUSPENDED</button>
+            <button [disabled]="editBankAccountFormGroup.controls['status'].value == 'BLOCKED'" type="button" class="btn btn-success m-1" (click)="updateStatus('BLOCKED')">BLOCKED</button>
           </div>
         </div>
-
-
       <div class="mb-3">
         <label class="form-label fw-bold text-info">Account Currency : </label>
           <select formControlName="currency" class="form-select form-select-sm mb-3 " aria-label=".form-select-lg example">
@@ -39,7 +37,6 @@
             <option value="USD">USD</option>
           </select>
       </div>
-
       <div class="mb-3" *ngIf="bankAccountTypes">
         <label class="form-label fw-bold">Account type:</label>
         <div class="form-check" *ngFor="let at of bankAccountTypes">

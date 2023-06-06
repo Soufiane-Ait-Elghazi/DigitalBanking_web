@@ -1,5 +1,5 @@
 <div class="container mt-2 ">
-  <div class="card mb-3 border-white shadow p-3 bg-body rounded">
+  <div class="card mb-3 border-white shadow p-3 rounded ">
     <div class=" h3 card-header bg-white fw-bolder border-white text-primary">APPLICATION USERS</div>
     <div class="text-bg-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <app-not-autorized-modal *ngIf="showNotModal" [title]="'Error 403: Unauthorized Access'" (confirm)="changeNote($event)"></app-not-autorized-modal>
@@ -10,7 +10,7 @@
             <form [formGroup]="searchFormGroup" (ngSubmit)="onSearchUser()" class="col-md-6">
               <div class="input-group col align-self-end">
                 <label class="input-group-text text-white bg-primary">Keyword</label>
-                <input type="text" formControlName="keyword" class="form-control" placeholder="PA25XXXX">
+                <input type="text" formControlName="keyword" class="form-control" placeholder="username">
                 <button class="btn btn-outline-info ">
                   <span class="bi bi-search"></span>
                 </button>
@@ -34,9 +34,9 @@
         <tbody>
         <tr *ngFor="let user of users  | paginate: { itemsPerPage: 7, currentPage: p }">
 
-          <td>{{user.id}}</td>
-          <td>{{user.username}}</td>
-          <td>{{user.actived}}</td>
+          <td class="fw-bold">{{user.id}}</td>
+          <td class="h3 fw-bold" >{{user.username}}</td>
+          <td class="fw-bold">{{user.actived}}</td>
           <td *ngIf="user.roles">
             <ul *ngFor="let role of user.roles" class="list-group  list-group-flush">
               <li class="list-group-item p-0 m-0">
